@@ -1,4 +1,3 @@
-import React from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import Login from '../pages/Login';
@@ -10,9 +9,9 @@ function Router() {
     return( 
         <BrowserRouter>
             <Routes>
-                <Route path="/" element={ <Login/>} />
+                <Route path="/" element={ <Dashboard/> } />
+                <Route path="/login" element={ <Login/>} />
                 <Route path="/register" element={ <Register/> } />
-                <Route path="/dashboard" element={ <Dashboard/> } />
                 <Route path="/profile" element={ <Profile/> } />
             </Routes>
         </BrowserRouter>
