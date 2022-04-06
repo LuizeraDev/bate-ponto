@@ -8,29 +8,44 @@ import WatchLaterIcon from '@mui/icons-material/WatchLater';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+
+
 function Copyright(props) {
     return (
         <Typography variant="body1" align="center" {...props}>
-            {'Copyright © '} Bate&Ponto{' '} {new Date().getFullYear()} {'.'}
+            {'Copyright © '} Bate&Ponto{' '} {new Date().getFullYear()}
         </Typography>
     );
 }
 
 export default function SignIn() {
+    const navigate = useNavigate();
+    
     const handleSubmit = (event) => {
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
-        console.log({
+
+        let data = new FormData(event.currentTarget);
+
+        data = {
             email: data.get('email'),
             password: data.get('password'),
+        }
+
+        axios.post('http://localhost:3333/auth', data).then((res) => {
+            localStorage.setItem("token", res.data.token);
+            localStorage.setItem("refreshToken", res.data.refreshToken);
         });
+
+        navigate('/');
     };
 
     return (
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
-                    marginTop: 15,
+                    marginTop: 10,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -71,12 +86,10 @@ export default function SignIn() {
                     >
                         Entrar
                     </Button>
-                    <Grid container>
-                        <Grid alignItems="center">
-                            <Link href="/register" color="primary.light" variant="body2">
-                                {"Não tem uma conta? Registrar-se"}
-                            </Link>
-                        </Grid>
+                    <Grid item xs="auto">
+                        <Link href="/register" color="primary.light" variant="body2">
+                            {"Não tem uma conta? Registrar-se"}
+                        </Link>
                     </Grid>
                 </Box>
             </Box>

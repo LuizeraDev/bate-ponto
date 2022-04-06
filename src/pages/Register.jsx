@@ -11,7 +11,7 @@ import Container from '@mui/material/Container';
 function Copyright(props) {
     return (
         <Typography variant="body1" align="center" {...props}>
-            {'Copyright © '} Bate&Ponto{' '} {new Date().getFullYear()} {'.'}
+            {'Copyright © '} Bate&Ponto{' '} {new Date().getFullYear()}
         </Typography>
     );
 }
@@ -30,7 +30,7 @@ function Register() {
         <Container component="main" maxWidth="xs">
             <Box
                 sx={{
-                    marginTop: 15,
+                    marginTop: 10,
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
@@ -47,11 +47,34 @@ function Register() {
                         margin="normal"
                         required
                         fullWidth
+                        id="name"
+                        label="Nome"
+                        name="name"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
                         id="email"
                         label="Email"
                         name="email"
                         autoComplete="email"
-                        autoFocus
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="cpf"
+                        label="CPF"
+                        name="cpf"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="cellphone"
+                        label="Celular"
+                        name="cellphone"
                     />
                     <TextField
                         margin="normal"
@@ -61,7 +84,15 @@ function Register() {
                         label="Senha"
                         name="password"
                         type="password"
-                        autoComplete="current-password"
+                    /> 
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="confirmPassword"
+                        label="Confirmar Senha"
+                        name="confirmPassword"
+                        type="password"
                     /> 
                     <Button
                         type="submit"
@@ -69,12 +100,12 @@ function Register() {
                         variant="contained"
                         sx={{ mt: 3, mb: 2 }}
                     >
-                        Entrar
+                        Avançar
                     </Button>
                     <Grid container>
                         <Grid alignItems="center">
                             <Link href="/login" color="primary.light" variant="body2">
-                                {"Não tem uma conta? Registrar-se"}
+                                {"Já possui uma conta? Entrar"}
                             </Link>
                         </Grid>
                     </Grid>
