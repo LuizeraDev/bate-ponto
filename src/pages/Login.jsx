@@ -1,10 +1,10 @@
-import { Avatar, Button, TextField, Link, Grid, Typography, Container, Box } from '@mui/material';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import Copyright from '../components/Copyright';
-import Swal from 'sweetalert2';
-
+import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
+import env from "react-dotenv";
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import Copyright from '../components/Copyright';
 
 
 function Login() {
@@ -20,7 +20,7 @@ function Login() {
             password: data.get('password'),
         }
 
-        axios.post('http://localhost:3333/auth', user).then((res) => {
+        axios.post(`${env.API_URL}/auth`, user).then((res) => {
             if (res.data.token && res.data.refreshToken) {
                 localStorage.setItem("token", res.data.token);
                 localStorage.setItem("refreshToken", res.data.refreshToken);
