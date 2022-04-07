@@ -1,29 +1,25 @@
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-
-function Copyright(props) {
-    return (
-        <Typography variant="body1" align="center" {...props}>
-            {'Copyright © '} Bate&Ponto{' '} {new Date().getFullYear()}
-        </Typography>
-    );
-}
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+import Copyright from '../components/Copyright';
 
 function Register() {
+    const navigate = useNavigate();
+
     const handleSubmit = (event) => {
         event.preventDefault();
         const data = new FormData(event.currentTarget);
-        console.log({
+
+        const userRegister = {
+            name: data.get('name'),
             email: data.get('email'),
+            cpf: data.get('cpf'),
+            cellphone: data.get('cellphone'),
             password: data.get('password'),
-        });
+            confirmPassword: data.get('confirmPassword')
+        }
+
+        navigate('/register/step-2', { state: userRegister });
     };
 
     return (
@@ -37,10 +33,10 @@ function Register() {
                 }}
             >
                 <Avatar sx={{ m: 1, width: 56, height: 56, bgcolor: 'primary.main' }}>
-                    <WatchLaterIcon sx={{ width: 50, height: 50 }} />
+                    <AccountCircleIcon sx={{ width: 40, height: 40 }} />
                 </Avatar>
                 <Typography component="h4" variant="h4">
-                    Bate & Ponto
+                    Usuário
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -84,7 +80,7 @@ function Register() {
                         label="Senha"
                         name="password"
                         type="password"
-                    /> 
+                    />
                     <TextField
                         margin="normal"
                         required
@@ -93,7 +89,7 @@ function Register() {
                         label="Confirmar Senha"
                         name="confirmPassword"
                         type="password"
-                    /> 
+                    />
                     <Button
                         type="submit"
                         fullWidth
