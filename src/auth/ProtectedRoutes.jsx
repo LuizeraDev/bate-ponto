@@ -12,13 +12,13 @@ const useAuth = () => {
         
         localStorage.setItem('userId', validateToken.userId);
         
-        let isExpired = true; 
+        let isExpired = false; 
 
         const dateNow = new Date().getTime();
-        const convert = dateNow.toString().slice(0, -3);
+        const actualTime = dateNow.toString().slice(0, -3);
     
-        if (validateToken.exp > parseInt(convert)) {
-            isExpired = false;
+        if (validateToken.exp > parseInt(actualTime)) {
+            isExpired = true;
         }
         
         return isExpired;
@@ -29,7 +29,7 @@ const useAuth = () => {
 
 const ProtectedRoutes = () => {
     const isAuth = useAuth();
-    return isAuth ?  <Navigate to="/login" /> : <Outlet />;
+    return isAuth ?  <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoutes;
