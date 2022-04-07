@@ -1,6 +1,7 @@
 import BussinessIcon from '@mui/icons-material/Business';
 import { Avatar, Box, Button, Container, Grid, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
+import env from "react-dotenv";
 import { useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Copyright from '../components/Copyright';
@@ -24,7 +25,7 @@ function RegisterCompany() {
             cnpj: data.get('cnpj')
         }
 
-        axios.post('http://localhost:3333/user/register', fullRegister).then((res) => {
+        axios.post(`${env.API_URL}/user/register`, fullRegister).then((res) => {
             if (res.status === 201) {
                 Swal.fire({
                     title: 'Usuário e empresa criados com sucesso!',
