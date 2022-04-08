@@ -20,10 +20,11 @@ function Login() {
             password: data.get('password'),
         }
 
-        axios.post(`${process.env.REACT_APP_API_URL}/auth`, user).then((res) => {
+        axios.post(`${process.env.REACT_APP_API_URL}/auth`, user)
+        .then((res) => {
             if (res.data.token && res.data.refreshToken) {
-                localStorage.setItem("token", res.data.token);
-                localStorage.setItem("refreshToken", res.data.refreshToken);
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('refreshToken', res.data.refreshToken);
                 navigate('/');            
             }
         }).catch(function (error) {

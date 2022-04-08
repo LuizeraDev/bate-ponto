@@ -24,7 +24,8 @@ function RegisterCompany() {
             cnpj: data.get('cnpj')
         }
         
-        axios.post(`${process.env.REACT_APP_API_URL}/user/register`, fullRegister).then((res) => {
+        axios.post(`${process.env.REACT_APP_API_URL}/user/register`, fullRegister)
+        .then((res) => {
             if (res.status === 201) {
                 Swal.fire({
                     title: 'Usuário e empresa criados com sucesso!',

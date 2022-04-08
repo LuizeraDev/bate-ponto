@@ -6,7 +6,6 @@ import Register from '../pages/Register';
 import RegisterCompany from '../pages/RegisterCompany';
 import ProtectedRoutes from '../auth/ProtectedRoutes';
 
-
 function Router() {
     return( 
         <BrowserRouter>
