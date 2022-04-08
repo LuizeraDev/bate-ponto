@@ -1,10 +1,9 @@
 import axios from 'axios';
 import * as jose from 'jose';
+import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from "react-router";
 
-var teste;
-
-const verifyToken = () => {
+const verifyToken = async() => {
     const user = {
         token: localStorage.getItem('token'),
         refreshToken: localStorage.getItem('refreshToken')
@@ -19,8 +18,7 @@ const verifyToken = () => {
         const actualTime = dateNow.toString().slice(0, -3);
 
         if (parseInt(actualTime) > validateToken.exp) {
-            const verifyRefresh = verifyRefreshToken(user.refreshToken);
-            console.log('verifyRefresh return', verifyRefresh)
+            const verifyRefresh = await verifyRefreshToken(user.refreshToken);
             return verifyRefresh ? true : false;
         }
     }
@@ -28,32 +26,31 @@ const verifyToken = () => {
     return true;
 };
 
-const verifyRefreshToken = (refresh) => {
+const verifyRefreshToken = async(refresh) => {
     const refreshToken = { "refreshToken": refresh };
 
-    axios.post(`${process.env.REACT_APP_API_URL}/auth/refresh`, refreshToken)
-        .then((res) => {
-            localStorage.setItem('token', res.data.token);
-            teste = true; 
-        }).catch(function (error) {
-            console.log("catch", error);
-            teste = false;
-        });
-
-    return teste;
+    try {
+        const newToken = await axios.post(`${process.env.REACT_APP_API_URL}/auth/refresh`, refreshToken);
+        localStorage.setItem('token', newToken.data.token);
+        return true;
+    } catch (error) {
+        console.log(error.message);
+        return false
+    }
 }
 
 const ProtectedRoutes = () => {
-    const isAuth = verifyToken();
-    console.log('isAuth:', isAuth);
-    if (isAuth) {
-        console.log("entrou aqui");
-        return <Outlet />;
+    const [ authenticated, setAuthenticated] = useState();
+
+    useEffect(() => {
+        verifyToken().then(res => setAuthenticated(res))
+    }, [])
+
+    if (authenticated === undefined) {
+        return "<p>Loading...</p>";
     } else {
-        console.log("vai voltar pro inicio");
-        return <Navigate to="/login" />;
+        return authenticated ? <Outlet /> : <Navigate to="/login" />
     }
-    //return isAuth ? <Outlet /> : <Navigate to="/login" />;
 };
 
 export default ProtectedRoutes;
