@@ -1,9 +1,9 @@
 import { Box, Container, Typography } from '@mui/material';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
-import Table from '../components/Table';
+import TablePagination from '../components/PaginationTable';
 
-function Appointments() {
+function Colaborators() {
     return (
         <Box>
             <Navbar />
@@ -16,9 +16,9 @@ function Appointments() {
                     color="text.primary"
                     gutterBottom
                 >
-                    Meus Apontamentos
+                    Meus Colaboradores
                 </Typography>
-                <Table/>
+                <TablePagination/>
                 {/* Footer */}
                 <Container
                     maxWidth="md"
@@ -36,4 +36,4 @@ function Appointments() {
     );
 }
 
-export default Appointments;
+export default Colaborators;

@@ -1,11 +1,12 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import ProtectedRoutes from '../auth/ProtectedRoutes';
+import Appointments from '../pages/Appointments';
+import Colaborators from '../pages/Colaborators';
 import Dashboard from '../pages/Dashboard';
 import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Register from '../pages/Register';
 import RegisterCompany from '../pages/RegisterCompany';
-import Appointments from '../pages/Appointments';
-import ProtectedRoutes from '../auth/ProtectedRoutes';
 
 function Router() {
     return( 
@@ -18,6 +19,7 @@ function Router() {
                     <Route path="/" element={ <Dashboard/> } />
                     <Route path="/profile" element={ <Profile/> } />
                     <Route path="/appointments" element={ <Appointments/> } />
+                    <Route path="/colaborators" element={ <Colaborators/> } />
                 </Route>
             </Routes>
         </BrowserRouter>

@@ -22,6 +22,14 @@ function Navbar() {
                 <Link
                     variant="button"
                     color="inherit"
+                    href="/colaborators"
+                    sx={{ my: 1, mx: 1.5 }}
+                >
+                    Colaboradores
+                </Link>
+                <Link
+                    variant="button"
+                    color="inherit"
                     href="/appointments"
                     sx={{ my: 1, mx: 1.5 }}
                 >

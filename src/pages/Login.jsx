@@ -1,9 +1,9 @@
-import { Avatar, Button, TextField, Link, Grid, Typography, Container, Box } from '@mui/material';
 import WatchLaterIcon from '@mui/icons-material/WatchLater';
-import Copyright from '../components/Copyright';
-import Swal from 'sweetalert2';
+import { Avatar, Box, Button, Container, TextField, Typography } from '@mui/material';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+import Copyright from '../components/Copyright';
 
 function Login() {
     const navigate = useNavigate();
@@ -78,14 +78,6 @@ function Login() {
                     >
                         Entrar
                     </Button>
-                    <Grid item xs="auto">
-                        <Typography component="h2" variant="body2">
-                            {"Não tem uma conta? "}
-                            <Link href="/register/step-1" color="primary.light" variant="body2">
-                                {"Registrar-se"}
-                            </Link>
-                        </Typography>
-                    </Grid>
                 </Box>
             </Box>
             <Copyright sx={{ mt: 8, mb: 4 }} />
