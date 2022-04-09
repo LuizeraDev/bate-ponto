@@ -2,11 +2,12 @@ import { Box, Container, Typography } from '@mui/material';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import Table from '../components/Table';
+import DatePicker from '../components/DatePicker';
 
 function Appointments() {
     return (
         <Box>
-            <Navbar />
+            <Navbar/>
             {/* Main */}
             <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
                 <Typography
@@ -18,6 +19,7 @@ function Appointments() {
                 >
                     Meus Apontamentos
                 </Typography>
+                <DatePicker/>
                 <Table/>
                 {/* Footer */}
                 <Container
