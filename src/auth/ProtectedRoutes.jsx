@@ -35,7 +35,7 @@ const verifyRefreshToken = async(refresh) => {
         return true;
     } catch (error) {
         console.log(error.message);
-        return false
+        return false;
     }
 }
 
@@ -43,13 +43,13 @@ const ProtectedRoutes = () => {
     const [ authenticated, setAuthenticated] = useState();
 
     useEffect(() => {
-        verifyToken().then(res => setAuthenticated(res))
+        verifyToken().then(res => setAuthenticated(res));
     }, [])
 
     if (authenticated === undefined) {
         return "<p>Loading...</p>";
     } else {
-        return authenticated ? <Outlet /> : <Navigate to="/login" />
+        return authenticated ? <Outlet /> : <Navigate to="/login" />;
     }
 };
 

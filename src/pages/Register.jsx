@@ -17,7 +17,7 @@ function Register() {
             cellphone: data.get('cellphone'),
             password: data.get('password'),
             confirmPassword: data.get('confirmPassword')
-        }
+        };
 
         navigate('/register/step-2', { state: userRegister });
     };
@@ -94,15 +94,19 @@ function Register() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ py: 1.9, mt: 3, mb: 2 }}
+                        size="large"
                     >
                         Avançar
                     </Button>
                     <Grid container>
                         <Grid alignItems="center">
-                            <Link href="/login" color="primary.light" variant="body2">
-                                {"Já possui uma conta? Entrar"}
-                            </Link>
+                            <Typography component="h2" variant="body2">
+                                {"Já possui uma conta? "}
+                                <Link href="/login" color="primary.light" variant="body2">
+                                    {"Entrar"}
+                                </Link>
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Box>

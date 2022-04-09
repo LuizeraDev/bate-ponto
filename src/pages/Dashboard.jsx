@@ -1,57 +1,50 @@
-import { AppBar, Button, Container, CssBaseline, GlobalStyles, Link, Toolbar, Typography } from '@mui/material';
-import Copyright from '../components/Copyright';
+import { Button, Container, Typography, Box } from '@mui/material';
+import axios from 'axios';
 import { useState } from 'react';
+import Swal from 'sweetalert2';
+import Copyright from '../components/Copyright';
+import Navbar from '../components/Navbar';
 
 function Dashboard() {
-    let time = new Date().toLocaleTimeString();
+    const userToken = localStorage.getItem('token');
 
-    const [timer, setTimer] = useState(time);
+    let actualTime = new Date().toLocaleTimeString();
+
+    const [time, setTime] = useState(actualTime);
 
     const UpdateTime = () => {
-        time = new Date().toLocaleTimeString();
-        setTimer(time);
-    }
+        actualTime = new Date().toLocaleTimeString();
+        setTime(actualTime);
+    };
 
     setInterval(UpdateTime, 1000);
 
+    const appointment = () => {
+        const timeStart = {
+            start: new Date()
+        };
+
+        axios.post(`${process.env.REACT_APP_API_URL}/appointment/new`, timeStart, {
+            headers: {
+                'Authorization': `Bearer ${userToken}`
+            },
+        }).then((res) => {
+            Swal.fire({
+                title: 'Ponto batido com sucesso!',
+                icon: 'success'
+            });
+        }).catch(function (error) {
+            Swal.fire({
+                title: 'Algo deu errado... :(',
+                icon: 'error'
+            });
+        });
+    }
+
     return (
-        <div>
-            <GlobalStyles styles={{ ul: { margin: 0, padding: 0, listStyle: 'none' } }} />
-            <CssBaseline />
-            <AppBar
-                position="static"
-                color="default"
-                elevation={0}
-                sx={{ borderBottom: (theme) => `1px solid ${theme.palette.divider}` }}
-            >
-                <Toolbar sx={{ flexWrap: 'wrap' }}>
-                    <Typography variant="h6" color="inherit" noWrap sx={{ flexGrow: 1 }}>
-                        Bate&Ponto
-                    </Typography>
-                    <nav>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="/"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Dashboard
-                        </Link>
-                        <Link
-                            variant="button"
-                            color="text.primary"
-                            href="/profile"
-                            sx={{ my: 1, mx: 1.5 }}
-                        >
-                            Perfil
-                        </Link>
-                    </nav>
-                    <Button href="/login" variant="contained" sx={{ my: 1, mx: 1.5 }}>
-                        Sair
-                    </Button>
-                </Toolbar>
-            </AppBar>
-            {/* Body */}
+        <Box>
+            <Navbar />
+            {/* Main */}
             <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
                 <Typography
                     component="h1"
@@ -63,15 +56,15 @@ function Dashboard() {
                     Hora atual
                 </Typography>
                 <Typography variant="h2" align="center" color="text.secondary" component="p">
-                  { timer }
+                    {time}
                 </Typography>
                 <Container align="center">
-                    <Button href="#" variant="contained" size="large" sx={{ my: 4, mx: 1.5 }}   
-                    onClick={() => {
-                        alert('Você registrou seu ponto');
-                    }}
+                    <Button href="#" variant="contained" size="large" sx={{ py: 3, pl: 10, px: 10, my: 4, mx: 1.5 }}
+                        onClick={() => {
+                            appointment()
+                        }}
                     >
-                            Bater Ponto 
+                        Bater Ponto
                     </Button>
                 </Container>
             </Container>
@@ -87,7 +80,7 @@ function Dashboard() {
             >
                 <Copyright sx={{ mt: 5 }} />
             </Container>
-        </div>
+        </Box>
     );
 }
 

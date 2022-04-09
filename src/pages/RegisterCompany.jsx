@@ -22,27 +22,27 @@ function RegisterCompany() {
             confirmPassword: state.confirmPassword,
             companyName: data.get('companyName'),
             cnpj: data.get('cnpj')
-        }
-        
+        };
+
         axios.post(`${process.env.REACT_APP_API_URL}/user/register`, fullRegister)
-        .then((res) => {
-            if (res.status === 201) {
+            .then((res) => {
+                if (res.status === 201) {
+                    Swal.fire({
+                        title: 'Usuário e empresa criados com sucesso!',
+                        icon: 'success',
+                        confirmButtonText: 'Confirmar',
+                    }).then((result) => {
+                        if (result.isConfirmed)
+                            navigate('/login')
+                    });
+                }
+            }).catch(function (error) {
                 Swal.fire({
-                    title: 'Usuário e empresa criados com sucesso!',
-                    icon: 'success',
-                    confirmButtonText: 'Confirmar',
-                }).then((result) => {
-                    if (result.isConfirmed)
-                        navigate('/login')
+                    title: 'Alguns dados não foram preenchidos corretamente',
+                    icon: 'error',
+                    cancelButtonText: 'Cancelar',
                 });
-            }
-        }).catch(function (error) {
-            Swal.fire({
-                title: 'Alguns dados não foram preenchidos corretamente',
-                icon: 'error',
-                cancelButtonText: 'Cancelar',
             });
-        });
     };
 
     return (
@@ -82,15 +82,19 @@ function RegisterCompany() {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}
+                        sx={{ py: 1.9, mt: 3, mb: 2 }}
+                        size="large"
                     >
                         Cadastrar
                     </Button>
                     <Grid container>
                         <Grid alignItems="center">
-                            <Link href="/login" color="primary.light" variant="body2">
-                                {"Já possui uma conta? Entrar"}
-                            </Link>
+                            <Typography component="h2" variant="body2">
+                                {"Preencheu algo errado? "}
+                                <Link href="/register/step-1" color="primary.light" variant="body2">
+                                    {"Voltar"}
+                                </Link>
+                            </Typography>
                         </Grid>
                     </Grid>
                 </Box>
