@@ -8,7 +8,7 @@ function Appointments() {
         <Box>
             <Navbar />
             {/* Main */}
-            <Container disableGutters maxWidth="lg" component="main" sx={{ pt: 10, pb: 6 }}>
+            <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
                 <Typography
                     component="h1"
                     variant="h3"

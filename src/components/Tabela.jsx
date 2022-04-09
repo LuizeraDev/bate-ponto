@@ -22,7 +22,7 @@ function DenseTable() {
       <Table sx={{ minWidth: 100 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>
-            <TableCell align="center">Data</TableCell>
+            <TableCell align="left">Data</TableCell>
             <TableCell align="center">Entrada</TableCell>
             <TableCell align="center">Saída</TableCell>
           </TableRow>
@@ -33,7 +33,7 @@ function DenseTable() {
               key={row.date}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
-              <TableCell component="th" align="center" scope="row">
+              <TableCell component="th" align="left" scope="row">
                 {row.date}
               </TableCell>
               <TableCell align="center">{row.start}</TableCell>
