@@ -17,7 +17,15 @@ function Navbar() {
                     href="/"
                     sx={{ my: 1, mx: 1.5 }}
                 >
-                    Dashboard
+                    Inicio
+                </Link>
+                <Link
+                    variant="button"
+                    color="inherit"
+                    href="/appointments"
+                    sx={{ my: 1, mx: 1.5 }}
+                >
+                    Apontamentos
                 </Link>
                 <Link
                     variant="button"

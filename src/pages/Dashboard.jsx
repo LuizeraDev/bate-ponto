@@ -43,7 +43,7 @@ function Dashboard() {
 
     return (
         <Box>
-            <Navbar />
+            <Navbar/>
             {/* Main */}
             <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
                 <Typography

@@ -25,7 +25,7 @@ function Profile() {
 
     return (
         <Box>
-            <Navbar />
+            <Navbar/>
             {/* Main */}
             <Container component="main" maxWidth="xs">
                 <Box
@@ -36,7 +36,7 @@ function Profile() {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography component="h4" variant="h4">
+                    <Typography component="h3" variant="h3">
                         Meus dados
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>

@@ -4,6 +4,7 @@ import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Register from '../pages/Register';
 import RegisterCompany from '../pages/RegisterCompany';
+import Appointments from '../pages/Appointments';
 import ProtectedRoutes from '../auth/ProtectedRoutes';
 
 function Router() {
@@ -16,6 +17,7 @@ function Router() {
                 <Route element={ <ProtectedRoutes/> }>
                     <Route path="/" element={ <Dashboard/> } />
                     <Route path="/profile" element={ <Profile/> } />
+                    <Route path="/appointments" element={ <Appointments/> } />
                 </Route>
             </Routes>
         </BrowserRouter>
