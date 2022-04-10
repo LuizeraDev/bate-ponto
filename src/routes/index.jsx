@@ -7,12 +7,14 @@ import Login from '../pages/Login';
 import Profile from '../pages/Profile';
 import Register from '../pages/Register';
 import RegisterCompany from '../pages/RegisterCompany';
+import Forgot from '../pages/Forgot';
 
 function Router() {
     return( 
         <BrowserRouter>
             <Routes>
                 <Route path="/login" element={ <Login/>} />
+                <Route path="/forgot" element={ <Forgot/>} />
                 <Route path="/register/step-1" element={ <Register/> } />
                 <Route path="/register/step-2" element={ <RegisterCompany/> } />
                 <Route element={ <ProtectedRoutes/> }>

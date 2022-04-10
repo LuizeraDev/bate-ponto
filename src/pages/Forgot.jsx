@@ -1,33 +1,23 @@
-import WatchLaterIcon from '@mui/icons-material/WatchLater';
+import MailLock from '@mui/icons-material/MailLock';
 import { Avatar, Box, Button, Container, Link, TextField, Typography } from '@mui/material';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import Copyright from '../components/Copyright';
 
-function Login() {
-    const navigate = useNavigate();
-
+function ForgotPassword() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
         const data = new FormData(event.currentTarget);
 
-        const user = {
-            email: data.get('email'),
-            password: data.get('password'),
+        const email = {
+            email: data.get('email')
         }
-
-        axios.post(`${process.env.REACT_APP_API_URL}/auth`, user).then((res) => {
-            if (res.data.token && res.data.refreshToken) {
-                localStorage.setItem('token', res.data.token);
-                localStorage.setItem('refreshToken', res.data.refreshToken);
-                navigate('/');
-            }
-        }).catch(function (error) {
+       
+        axios.post(`${process.env.REACT_APP_API_URL}/user/forgot`, email).finally(() => {
             Swal.fire({
-                title: 'Usuário não encontrado',
-                icon: 'error'
+                title: 'Uma nova senha foi enviada para este usuário, caso exista.',
+                icon: 'success'
             });
         });
     };
@@ -43,10 +33,13 @@ function Login() {
                 }}
             >
                 <Avatar sx={{ m: 1, width: 56, height: 56, bgcolor: 'primary.main' }}>
-                    <WatchLaterIcon sx={{ width: 40, height: 40 }} />
+                    <MailLock sx={{ width: 40, height: 40 }} />
                 </Avatar>
                 <Typography component="h4" variant="h4">
-                    Bate & Ponto
+                    Recuperar Senha
+                </Typography>
+                <Typography component="h4" variant="body2" sx={{ mt: 2 }}>
+                    Preencha com o email, para enviarmos um email contendo uma nova senha.
                 </Typography>
                 <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                     <TextField
@@ -59,17 +52,6 @@ function Login() {
                         autoComplete="email"
                         autoFocus
                     />
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="password"
-                        label="Senha"
-                        name="password"
-                        type="password"
-                        autoComplete="current-password"
-                    />
-                    <Link href="/forgot" sx={{ ml: 32}}>Esqueceu a senha?</Link>
                     <Button
                         type="submit"
                         fullWidth
@@ -77,8 +59,9 @@ function Login() {
                         sx={{ py: 1.9, mt: 3, mb: 2 }}
                         size="large"
                     >
-                        Entrar
+                        Enviar
                     </Button>
+                    <Link href="/login" sx={{ ml: 36 }}>Voltar ao Inicio</Link>
                 </Box>
             </Box>
             <Copyright sx={{ mt: 8, mb: 4 }} />
@@ -86,4 +69,4 @@ function Login() {
     );
 }
 
-export default Login;
+export default ForgotPassword;
