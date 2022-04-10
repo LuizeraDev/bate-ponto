@@ -7,7 +7,7 @@ import DatePicker from '../components/DatePicker';
 function Appointments() {
     return (
         <Box>
-            <Navbar/>
+            <Navbar />
             {/* Main */}
             <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
                 <Typography
@@ -19,8 +19,10 @@ function Appointments() {
                 >
                     Meus Apontamentos
                 </Typography>
-                <DatePicker/>
-                <Table/>
+                <Box sx={{ ml: 24, mt: 5 }}>
+                    <DatePicker />
+                </Box>
+                <Table />
                 {/* Footer */}
                 <Container
                     maxWidth="md"

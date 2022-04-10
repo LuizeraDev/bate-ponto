@@ -2,8 +2,9 @@ import axios from 'axios';
 import * as jose from 'jose';
 import { useEffect, useState } from 'react';
 import { Navigate, Outlet } from "react-router";
+import Loading from '../components/Loading';
 
-const verifyToken = async() => {
+const verifyToken = async () => {
     const user = {
         token: localStorage.getItem('token'),
         refreshToken: localStorage.getItem('refreshToken')
@@ -26,7 +27,7 @@ const verifyToken = async() => {
     return true;
 };
 
-const verifyRefreshToken = async(refresh) => {
+const verifyRefreshToken = async (refresh) => {
     const refreshToken = { "refreshToken": refresh };
 
     try {
@@ -40,14 +41,14 @@ const verifyRefreshToken = async(refresh) => {
 }
 
 const ProtectedRoutes = () => {
-    const [ authenticated, setAuthenticated] = useState();
+    const [authenticated, setAuthenticated] = useState();
 
     useEffect(() => {
         verifyToken().then(res => setAuthenticated(res));
-    }, [])
+    }, []);
 
     if (authenticated === undefined) {
-        return "<p>Loading...</p>";
+        return <Loading />;
     } else {
         return authenticated ? <Outlet /> : <Navigate to="/login" />;
     }
