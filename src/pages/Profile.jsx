@@ -6,50 +6,84 @@ import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 
 function Profile() {
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [cellphone, setCellphone] = useState('');
+    const [password, setPassword] = useState('');
 
-    const [user, setUser] = useState('');
+    const [nameError, setNameError] = useState(false);
+    const [emailError, setEmailError] = useState(false);
+    const [cellphoneError, setCellphoneError] = useState(false);
+    const [passwordError, setPasswordError] = useState(false);
 
     useEffect(() => {
         const userToken = localStorage.getItem('token');
+
         const getUser = async () => {
             const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },
             });
-            setUser(response.data.user);
+            setName(response.data.user.name);
+            setEmail(response.data.user.email);
+            setCellphone(response.data.user.cellphone);
         }
 
         return getUser();
     }, []);
 
     const handleSubmit = (event) => {
-        const userToken = localStorage.getItem('token');
         event.preventDefault();
-        const data = new FormData(event.currentTarget);
 
-        const userUpdated = {
-            name: data.get('name'),
-            email: data.get('email'),
-            cellphone: data.get('cellphone'),
-            password: data.get('password'),
+        const userToken = localStorage.getItem('token');
+
+        name === '' ? setNameError(true) : setNameError(false);
+        email === '' ? setEmailError(true) : setEmailError(false);
+        cellphone === '' ? setCellphoneError(true) : setCellphoneError(false);
+        password.length < 6 ? setPasswordError(true) : setPasswordError(false);
+        password === '' ? setPasswordError(false) : setPasswordError(true);
+
+        let userUpdated = {
+            name: name,
+            email: email,
+            cellphone: cellphone,
         }
 
-        axios.patch(`${process.env.REACT_APP_API_URL}/user/update`, userUpdated, {
-            headers: {
-                'Authorization': `Bearer ${userToken}`
-            },
-        }).then((res) => {
+        if (password !== '') {
+            userUpdated['password'] = password;
+        }
+
+        console.log("userUpdated", userUpdated)
+
+        if (name === '' || email === '' || cellphone === '') {
             Swal.fire({
-                title: 'Atualizado com sucesso!',
-                icon: 'success'
-            });
-        }).catch(function (error) {
-            Swal.fire({
-                title: 'Houve um erro na atualização',
+                title: 'Você não pode deixar certos campos em branco',
                 icon: 'error'
             });
-        });
+        } else if (password !== '' && password.length < 6) {
+            console.log("entrei aqui")
+            Swal.fire({
+                title: 'A nova senha precisa de ter mais de 6 caracteres',
+                icon: 'error'
+            });
+        } else {
+            axios.patch(`${process.env.REACT_APP_API_URL}/user/update`, userUpdated, {
+                headers: {
+                    'Authorization': `Bearer ${userToken}`
+                },
+            }).then((res) => {
+                Swal.fire({
+                    title: 'Atualizado com sucesso!',
+                    icon: 'success'
+                });
+            }).catch(function (error) {
+                Swal.fire({
+                    title: 'Houve um erro na atualização',
+                    icon: 'error'
+                });
+            });
+        }
     };
 
     return (
@@ -70,17 +104,19 @@ function Profile() {
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
+                            error={nameError}
                             margin="normal"
                             required
                             fullWidth
                             id="name"
                             label="Nome"
                             name="name"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user.name}
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
                             autoFocus
                         />
                         <TextField
+                            error={emailError}
                             margin="normal"
                             required
                             fullWidth
@@ -88,20 +124,22 @@ function Profile() {
                             label="Email"
                             name="email"
                             autoComplete="email"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user.email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            value={email}
                         />
                         <TextField
+                            error={cellphoneError}
                             margin="normal"
                             required
                             fullWidth
                             id="cellphone"
                             label="Celular"
                             name="cellphone"
-                            onChange={(e) => setUser(e.target.value)}
-                            value={user.cellphone}
+                            onChange={(e) => setCellphone(e.target.value)}
+                            value={cellphone}
                         />
                         <TextField
+                            error={passwordError}
                             margin="normal"
                             required
                             fullWidth
@@ -109,7 +147,7 @@ function Profile() {
                             label="Senha"
                             name="password"
                             type="password"
-                            onChange={(e) => setUser(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                         />
                         <Button
                             type="submit"
