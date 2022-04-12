@@ -7,15 +7,6 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-// function createData(date, start, end) {
-//   return { date, start, end };
-// }
-
-// const rows = [
-//   createData('09/04/2022', '08:00', '12:00'),
-//   createData('10/04/2022', '13:00', '17:00')
-// ];
-
 function DenseTable(props) {
   const { appointments } = props;
 
