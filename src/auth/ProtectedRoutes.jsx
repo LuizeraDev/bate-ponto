@@ -43,7 +43,9 @@ const ProtectedRoutes = () => {
     const [authenticated, setAuthenticated] = useState();
 
     useEffect(() => {
-        verifyToken().then(res => setAuthenticated(res));
+        setTimeout(() => {
+            verifyToken().then(res => setAuthenticated(res));
+        }, 450);
     }, []);
 
     if (authenticated === undefined) {
