@@ -8,16 +8,21 @@ import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import Table from '../components/Table';
 import axios from 'axios';
+import moment from 'moment';
 
 function Appointments() {
     const [appointments, setAppointments] = useState([]);
-    const [date, setDate] = useState(null);
+    const [date, setDate] = useState(moment());
 
-    useEffect(() => {
+    const getDate = (newDate) => {
         const userToken = localStorage.getItem('token');
 
+        const filter = {
+            date: newDate
+        }
+
         const getAppointments = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/all`, {
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/appointment/date`, filter, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },
@@ -26,6 +31,10 @@ function Appointments() {
         }
 
         return getAppointments();
+    }
+
+    useEffect(() => {
+        getDate();
     }, []);
 
     return (
@@ -49,6 +58,7 @@ function Appointments() {
                             value={date}
                             onChange={(newDate) => {
                                 setDate(newDate);
+                                getDate(newDate);
                             }}
                             renderInput={(params) => <TextField {...params} />}
                         />
