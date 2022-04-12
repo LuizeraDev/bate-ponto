@@ -8,6 +8,9 @@ import { useEffect, useState } from 'react';
 
 function Appointments() {
     const [appointments, setAppointments] = useState([]);
+    const [date, setDate] = useState();
+
+    console.log(date ? date : 'false');
 
     useEffect(() => {
         const userToken = localStorage.getItem('token');
@@ -39,7 +42,7 @@ function Appointments() {
                     Meus Apontamentos
                 </Typography>
                 <Box sx={{ ml: 24, mt: 5 }}>
-                    <DatePicker />
+                    <DatePicker setDate={setDate} />
                 </Box>
                 <Table appointments={appointments} />
                 {/* Footer */}

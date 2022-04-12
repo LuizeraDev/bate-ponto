@@ -5,9 +5,10 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { ptBR } from "date-fns/locale";
 
-function BasicDatePicker() {
+function BasicDatePicker(props) {
     const [value, setValue] = React.useState(null);
-
+    props.setDate(value);
+    
     return (
         <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
             <DatePicker
