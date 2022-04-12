@@ -41,8 +41,7 @@ function Profile() {
         name === '' ? setNameError(true) : setNameError(false);
         email === '' ? setEmailError(true) : setEmailError(false);
         cellphone === '' ? setCellphoneError(true) : setCellphoneError(false);
-        password.length < 6 ? setPasswordError(true) : setPasswordError(false);
-        password === '' ? setPasswordError(false) : setPasswordError(true);
+        password.length >= 6 || password === '' ? setPasswordError(false) : setPasswordError(true)
 
         let userUpdated = {
             name: name,
@@ -54,15 +53,12 @@ function Profile() {
             userUpdated['password'] = password;
         }
 
-        console.log("userUpdated", userUpdated)
-
         if (name === '' || email === '' || cellphone === '') {
             Swal.fire({
                 title: 'Você não pode deixar certos campos em branco',
                 icon: 'error'
             });
         } else if (password !== '' && password.length < 6) {
-            console.log("entrei aqui")
             Swal.fire({
                 title: 'A nova senha precisa de ter mais de 6 caracteres',
                 icon: 'error'
