@@ -1,16 +1,17 @@
-import { Box, Container, Typography } from '@mui/material';
+import { Box, Container, TextField, Typography } from '@mui/material';
+import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
+import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { ptBR } from "date-fns/locale";
+import { useEffect, useState } from 'react';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import Table from '../components/Table';
-import DatePicker from '../components/DatePicker';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
 
 function Appointments() {
     const [appointments, setAppointments] = useState([]);
-    const [date, setDate] = useState();
-
-    console.log(date ? date : 'false');
+    const [date, setDate] = useState(null);
 
     useEffect(() => {
         const userToken = localStorage.getItem('token');
@@ -42,7 +43,16 @@ function Appointments() {
                     Meus Apontamentos
                 </Typography>
                 <Box sx={{ ml: 24, mt: 5 }}>
-                    <DatePicker setDate={setDate} />
+                    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+                        <DatePicker
+                            label="Buscar por data"
+                            value={date}
+                            onChange={(newDate) => {
+                                setDate(newDate);
+                            }}
+                            renderInput={(params) => <TextField {...params} />}
+                        />
+                    </LocalizationProvider>
                 </Box>
                 <Table appointments={appointments} />
                 {/* Footer */}

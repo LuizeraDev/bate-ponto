@@ -6,21 +6,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import moment from 'moment';
 
 function DenseTable(props) {
   const { appointments } = props;
 
   const formatDate = (date) => {
-    const dateFormat = new Date(date).toLocaleDateString();
+    const fullDate = moment.utc(date).format('DD/MM/YYYY');
 
-    return dateFormat;
+    return fullDate;
   }
 
   const formatTime = (date) => {
-    const hoursFormat = new Date(date).getUTCHours();
-    const minutesFormat = new Date(date).getUTCMinutes();
+    const fullTime = moment.utc(date).format('HH:mm');
 
-    return `${hoursFormat}:${minutesFormat}`;
+    return fullTime;
   }
 
   return (
