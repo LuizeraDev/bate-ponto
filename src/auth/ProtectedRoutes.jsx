@@ -35,7 +35,6 @@ const verifyRefreshToken = async (refresh) => {
         localStorage.setItem('token', newToken.data.token);
         return true;
     } catch (error) {
-        console.log(error.message);
         return false;
     }
 }

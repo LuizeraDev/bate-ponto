@@ -3,8 +3,27 @@ import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import Table from '../components/Table';
 import DatePicker from '../components/DatePicker';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 
 function Appointments() {
+    const [appointments, setAppointments] = useState([]);
+
+    useEffect(() => {
+        const userToken = localStorage.getItem('token');
+
+        const getAppointments = async () => {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/all`, {
+                headers: {
+                    'Authorization': `Bearer ${userToken}`
+                },
+            });
+            setAppointments(response.data);
+        }
+
+        return getAppointments();
+    }, []);
+
     return (
         <Box>
             <Navbar />
@@ -22,7 +41,7 @@ function Appointments() {
                 <Box sx={{ ml: 24, mt: 5 }}>
                     <DatePicker />
                 </Box>
-                <Table />
+                <Table appointments={appointments} />
                 {/* Footer */}
                 <Container
                     maxWidth="md"
