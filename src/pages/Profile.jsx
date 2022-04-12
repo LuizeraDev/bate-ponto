@@ -41,7 +41,7 @@ function Profile() {
         name === '' ? setNameError(true) : setNameError(false);
         email === '' ? setEmailError(true) : setEmailError(false);
         cellphone === '' ? setCellphoneError(true) : setCellphoneError(false);
-        password.length >= 6 || password === '' ? setPasswordError(false) : setPasswordError(true)
+        password.length >= 6 || password === '' ? setPasswordError(false) : setPasswordError(true);
 
         let userUpdated = {
             name: name,
