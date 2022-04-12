@@ -20,7 +20,7 @@ function DenseTable(props) {
   const formatTime = (date) => {
     const fullTime = moment.utc(date).format('HH:mm');
 
-    return fullTime;
+    return fullTime !== 'Invalid date' ? fullTime : '00:00';
   }
 
   return (
