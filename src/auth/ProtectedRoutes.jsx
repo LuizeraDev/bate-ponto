@@ -14,6 +14,7 @@ const verifyToken = async () => {
         const validateToken = jose.decodeJwt(user.token);
 
         localStorage.setItem('userId', validateToken.userId);
+        localStorage.setItem('isAdmin', validateToken.isAdmin);
 
         const dateNow = new Date().getTime();
         const actualTime = dateNow.toString().slice(0, -3);
