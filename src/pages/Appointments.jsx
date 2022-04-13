@@ -14,14 +14,14 @@ function Appointments() {
     const [appointments, setAppointments] = useState([]);
     const [date, setDate] = useState(moment());
 
-    const getDate = () => {
+    const getAppointments = (newDate) => {
         const userToken = localStorage.getItem('token');
 
         const filter = {
-            date: date.subtract(3, "hours")
+            date: moment(newDate).subtract(3, "hours")
         }
 
-        const getAppointments = async () => {
+        const getAppointmentsByDate = async () => {
             const response = await axios.post(`${process.env.REACT_APP_API_URL}/appointment/date`, filter, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
@@ -30,11 +30,11 @@ function Appointments() {
             setAppointments(response.data);
         }
 
-        return getAppointments();
+        return getAppointmentsByDate();
     }
 
     useEffect(() => {
-        getDate();
+        getAppointments();
     }, []);
 
     return (
@@ -58,7 +58,7 @@ function Appointments() {
                             value={date}
                             onChange={(newDate) => {
                                 setDate(newDate);
-                                getDate();
+                                getAppointments(newDate); 
                             }}
                             renderInput={(params) => <TextField {...params} />}
                         />
