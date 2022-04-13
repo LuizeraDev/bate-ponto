@@ -95,7 +95,7 @@ function Profile() {
                         alignItems: 'center',
                     }}
                 >
-                    <Typography component="h3" variant="h3">
+                    <Typography component="h3" variant="h4">
                         Meus dados
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>

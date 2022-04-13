@@ -30,11 +30,9 @@ function Navbar() {
                     color="inherit"
                     href="/"
                     sx={{
-                        my: 1, mx: 1.5,
-                        ":hover": {
-                            color: '#cfd8dc'
-                        }
+                        my: 1, mx: 1.5
                     }}
+                    underline="hover"
                 >
                     Inicio
                 </Link>
@@ -43,11 +41,9 @@ function Navbar() {
                     color="inherit"
                     href="/colaborators"
                     sx={{
-                        my: 1, mx: 1.5,
-                        ":hover": {
-                            color: '#cfd8dc'
-                        }
+                        my: 1, mx: 1.5
                     }}
+                    underline="hover"
                 >
                     Colaboradores
                 </Link>
@@ -56,11 +52,9 @@ function Navbar() {
                     color="inherit"
                     href="/appointments"
                     sx={{
-                        my: 1, mx: 1.5,
-                        ":hover": {
-                            color: '#cfd8dc'
-                        }
+                        my: 1, mx: 1.5
                     }}
+                    underline="hover"
                 >
                     Apontamentos
                 </Link>
@@ -69,11 +63,9 @@ function Navbar() {
                     color="inherit"
                     href="/profile"
                     sx={{
-                        my: 1, mx: 1.5,
-                        ":hover": {
-                            color: '#cfd8dc'
-                        }
+                        my: 1, mx: 1.5
                     }}
+                    underline="hover"
                 >
                     Perfil
                 </Link>
@@ -82,11 +74,9 @@ function Navbar() {
                     color="inherit"
                     href="/login"
                     sx={{
-                        my: 1, mx: 1.5,
-                        ":hover": {
-                            color: '#cfd8dc'
-                        }
+                        my: 1, mx: 1.5
                     }}
+                    underline="hover"
                 >
                     Sair
                 </Link>

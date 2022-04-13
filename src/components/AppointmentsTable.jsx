@@ -24,7 +24,7 @@ function DenseTable(props) {
   }
 
   return (
-    <TableContainer component={Paper} sx={{ mt: 5 }}>
+    <TableContainer component={Paper}>
       <Table sx={{ minWidth: 100 }} size="small" aria-label="a dense table">
         <TableHead>
           <TableRow>

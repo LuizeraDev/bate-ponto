@@ -6,7 +6,7 @@ import { ptBR } from "date-fns/locale";
 import { useEffect, useState } from 'react';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
-import Table from '../components/Table';
+import Table from '../components/AppointmentsTable';
 import axios from 'axios';
 import moment from 'moment';
 
@@ -41,24 +41,32 @@ function Appointments() {
         <Box>
             <Navbar />
             {/* Main */}
-            <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
+            <Container maxWidth="sm" component="main" sx={{ pt: 10 }}>
                 <Typography
                     component="h1"
-                    variant="h3"
+                    variant="h4"
                     align="center"
                     color="text.primary"
                     gutterBottom
                 >
                     Meus Apontamentos
                 </Typography>
-                <Box sx={{ ml: 24, mt: 5 }}>
+                <Box
+                    sx={{
+                        mt: 5,
+                        mb: 5,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
                     <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
                         <DatePicker
                             label="Buscar por data"
                             value={date}
                             onChange={(newDate) => {
                                 setDate(newDate);
-                                getAppointments(newDate); 
+                                getAppointments(newDate);
                             }}
                             renderInput={(params) => <TextField {...params} />}
                         />
