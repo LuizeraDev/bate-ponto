@@ -8,6 +8,7 @@ import Profile from '../pages/Profile';
 import Register from '../pages/Register';
 import RegisterCompany from '../pages/RegisterCompany';
 import Forgot from '../pages/Forgot';
+import NotFound from '../pages/NotFound';
 
 function Router() {
     return( 
@@ -23,6 +24,7 @@ function Router() {
                     <Route path="/appointments" element={ <Appointments/> } />
                     <Route path="/colaborators" element={ <Colaborators/> } />
                 </Route>
+                <Route path="*" element={ <NotFound/> } />
             </Routes>
         </BrowserRouter>
     );
