@@ -14,11 +14,11 @@ function Appointments() {
     const [appointments, setAppointments] = useState([]);
     const [date, setDate] = useState(moment());
 
-    const getDate = (newDate) => {
+    const getDate = () => {
         const userToken = localStorage.getItem('token');
 
         const filter = {
-            date: newDate
+            date: date.subtract(3, "hours")
         }
 
         const getAppointments = async () => {
@@ -58,7 +58,7 @@ function Appointments() {
                             value={date}
                             onChange={(newDate) => {
                                 setDate(newDate);
-                                getDate(newDate);
+                                getDate();
                             }}
                             renderInput={(params) => <TextField {...params} />}
                         />
