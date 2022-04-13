@@ -13,7 +13,7 @@ function ForgotPassword() {
         const email = {
             email: data.get('email')
         }
-       
+
         axios.post(`${process.env.REACT_APP_API_URL}/user/forgot`, email).finally(() => {
             Swal.fire({
                 title: 'Uma nova senha foi enviada para este usuário, caso exista.',
@@ -38,10 +38,12 @@ function ForgotPassword() {
                 <Typography component="h4" variant="h4">
                     Recuperar Senha
                 </Typography>
-                <Typography component="h4" variant="body2" sx={{ mt: 2 }}>
-                    Preencha com o email, para enviarmos um email contendo uma nova senha.
-                </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                <Box sx={{ width: 396, height: 40, mt: 2, mb: 1 }}>
+                    <Typography component="h4" variant="body1">
+                        Preencha abaixo para enviarmos um email contendo uma nova senha.
+                    </Typography>
+                </Box>
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 396 }}>
                     <TextField
                         margin="normal"
                         required
@@ -61,7 +63,14 @@ function ForgotPassword() {
                     >
                         Enviar
                     </Button>
-                    <Link href="/login" sx={{ ml: 36 }}>Voltar ao Inicio</Link>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row-reverse',
+                        }}
+                    >
+                        <Link href="/login">Voltar ao Inicio</Link>
+                    </Box>
                 </Box>
             </Box>
             <Copyright sx={{ mt: 8, mb: 4 }} />

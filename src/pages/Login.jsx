@@ -69,7 +69,14 @@ function Login() {
                         type="password"
                         autoComplete="current-password"
                     />
-                    <Link href="/forgot" sx={{ ml: 32}}>Esqueceu a senha?</Link>
+                    <Box
+                        sx={{
+                            display: 'flex',
+                            flexDirection: 'row-reverse',
+                        }}
+                    >
+                        <Link href="/forgot">Esqueceu a senha?</Link>
+                    </Box>
                     <Button
                         type="submit"
                         fullWidth
