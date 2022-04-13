@@ -15,7 +15,11 @@ function Navbar() {
                     variant="button"
                     color="inherit"
                     href="/"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5,  
+                        ":hover": {
+                            color: '#cfd8dc'
+                        } 
+                    }}
                 >
                     Inicio
                 </Link>
@@ -23,7 +27,11 @@ function Navbar() {
                     variant="button"
                     color="inherit"
                     href="/colaborators"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5, 
+                        ":hover": {
+                            color: '#cfd8dc'
+                        } 
+                    }}
                 >
                     Colaboradores
                 </Link>
@@ -31,7 +39,11 @@ function Navbar() {
                     variant="button"
                     color="inherit"
                     href="/appointments"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5, 
+                        ":hover": {
+                            color: '#cfd8dc'
+                        } 
+                    }}
                 >
                     Apontamentos
                 </Link>
@@ -39,7 +51,11 @@ function Navbar() {
                     variant="button"
                     color="inherit"
                     href="/profile"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5,
+                        ":hover": {
+                            color: '#cfd8dc'
+                        } 
+                    }}
                 >
                     Perfil
                 </Link>
@@ -47,12 +63,17 @@ function Navbar() {
                     variant="button"
                     color="inherit"
                     href="/login"
-                    sx={{ my: 1, mx: 1.5 }}
+                    sx={{ my: 1, mx: 1.5,    
+                        ":hover": {
+                            color: '#cfd8dc'
+                        } 
+                     }}
                 >
                     Sair
                 </Link>
             </Toolbar>
         </AppBar>
+        
     );
 }
 
