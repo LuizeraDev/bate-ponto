@@ -5,6 +5,8 @@ import { useState } from 'react';
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
 
+    const isAdmin = localStorage.getItem('isAdmin');
+
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
     };
@@ -36,6 +38,7 @@ function Navbar() {
                 >
                     Inicio
                 </Link>
+                { isAdmin === 'true' &&
                 <Link
                     variant="button"
                     color="inherit"
@@ -47,6 +50,7 @@ function Navbar() {
                 >
                     Colaboradores
                 </Link>
+                }
                 <Link
                     variant="button"
                     color="inherit"
