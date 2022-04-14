@@ -2,30 +2,9 @@ import { Button, Box, Container, Typography } from '@mui/material';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import Table from '../components/UsersTable';
-import axios from 'axios';
-import { useEffect, useState } from 'react';
 import AddBoxIcon from '@mui/icons-material/AddBox';
 
 function Colaborators() {
-    const [users, setUsers] = useState([]);
-
-    const getUsers = async () => {
-        const userToken = localStorage.getItem('token');
-
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/users/list`, {
-            headers: {
-                'Authorization': `Bearer ${userToken}`
-            },
-        });
-        setUsers(response.data.users);
-
-        return response.data.users;
-    }
-
-    useEffect(() => {
-        getUsers()
-    }, []);
-
     return (
         <Box>
             <Navbar />
@@ -57,7 +36,7 @@ function Colaborators() {
                         <AddBoxIcon />&nbsp;Adicionar
                     </Button>
                 </Box>
-                <Table users={users} />
+                <Table />
                 {/* Footer */}
                 <Container
                     maxWidth="md"
