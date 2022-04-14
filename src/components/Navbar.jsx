@@ -5,7 +5,7 @@ import { useState } from 'react';
 function Navbar() {
     const [anchorElNav, setAnchorElNav] = useState(null);
 
-    const isAdmin = localStorage.getItem('isAdmin');
+    const isAdmin = (localStorage.getItem('isAdmin') === 'true');
 
     const handleOpenNavMenu = (event) => {
         setAnchorElNav(event.currentTarget);
@@ -38,18 +38,18 @@ function Navbar() {
                 >
                     Inicio
                 </Link>
-                { isAdmin === 'true' &&
-                <Link
-                    variant="button"
-                    color="inherit"
-                    href="/colaborators"
-                    sx={{
-                        my: 1, mx: 1.5
-                    }}
-                    underline="hover"
-                >
-                    Colaboradores
-                </Link>
+                {isAdmin &&
+                    <Link
+                        variant="button"
+                        color="inherit"
+                        href="/colaborators"
+                        sx={{
+                            my: 1, mx: 1.5
+                        }}
+                        underline="hover"
+                    >
+                        Colaboradores
+                    </Link>
                 }
                 <Link
                     variant="button"
@@ -127,13 +127,15 @@ function Navbar() {
                     >
                         <Typography>Inicio</Typography>
                     </MenuItem>
-                    <MenuItem
-                        onClick={handleCloseNavMenu}
-                        component="a"
-                        href='/colaborators'
-                    >
-                        <Typography>Colaboradores</Typography>
-                    </MenuItem>
+                    {isAdmin &&
+                        <MenuItem
+                            onClick={handleCloseNavMenu}
+                            component="a"
+                            href='/colaborators'
+                        >
+                            <Typography>Colaboradores</Typography>
+                        </MenuItem>
+                    }
                     <MenuItem
                         onClick={handleCloseNavMenu}
                         component="a"
