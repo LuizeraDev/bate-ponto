@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
+import InputMask from "react-input-mask";
 
 function Profile() {
     const [name, setName] = useState('');
@@ -129,17 +130,25 @@ function Profile() {
                             onChange={(e) => setEmail(e.target.value)}
                             value={email}
                         />
-                        <TextField
-                            error={cellphoneError}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="cellphone"
-                            label="Celular"
-                            name="cellphone"
-                            onChange={(e) => setCellphone(e.target.value)}
+                        <InputMask
+                            mask="(99) 9999-99999"
+                            disabled={false}
+                            alwaysShowMask={false}
                             value={cellphone}
-                        />
+                            onChange={(e) => setCellphone(e.target.value)}
+                        >
+                            {() => 
+                            <TextField
+                                error={cellphoneError}
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="cellphone"
+                                label="Celular"
+                                name="cellphone"
+                            />
+                            }
+                        </InputMask>
                         <TextField
                             error={passwordError}
                             margin="normal"
