@@ -35,7 +35,7 @@ function Register() {
         cpf === '' ? setCpfError(true) : setCpfError(false);
         cellphone === '' ? setCellphoneError(true) : setCellphoneError(false);
         password.length < 6 || password === '' ? setPasswordError(true) : setPasswordError(false);
-        confirmPasswordError === password ? setConfirmPasswordError(false) : setConfirmPasswordError(true);
+        confirmPassword !== password || confirmPassword === '' ? setConfirmPasswordError(true) : setConfirmPasswordError(false);
 
         const newUser = {
             name: name,
@@ -47,7 +47,7 @@ function Register() {
             isAdmin: data.get('isAdmin')
         };
 
-        if (name === '' || email === '' || cpf === '' || cellphone === '' || password === '') {
+        if (name === '' || email === '' || cpf === '' || cellphone === '' || password === '' || confirmPassword === '') {
             Swal.fire({
                 title: 'Campos em Branco',
                 text: 'Você não pode deixar nenhum dos campos em branco.',
