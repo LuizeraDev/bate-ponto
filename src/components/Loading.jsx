@@ -8,8 +8,18 @@ function CircularColor() {
     <Box>
       <Navbar />
       <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
-        <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
-          <CircularProgress color="primary" thickness={6.5} size={230} sx={{ ml: 20, mt: 15 }} />
+        <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10 }}>
+          <Box
+            sx={{
+              mt: 5,
+              mb: 5,
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+            }}
+          >
+            <CircularProgress color="primary" thickness={4} size={230} />
+          </Box>
         </Container>
       </Stack>
     </Box>
