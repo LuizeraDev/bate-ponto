@@ -41,7 +41,7 @@ function Appointments() {
         <Box>
             <Navbar />
             {/* Main */}
-            <Container maxWidth="sm" component="main" sx={{ pt: 10 }}>
+            <Container maxWidth="md" component="main" sx={{ pt: 10 }}>
                 <Typography
                     component="h1"
                     variant="h4"

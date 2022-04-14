@@ -27,7 +27,9 @@ function Login() {
         }).catch(function (error) {
             Swal.fire({
                 title: 'Usuário não encontrado',
-                icon: 'error'
+                text: 'Esse usuário não foi encontrado em nossos registros.',
+                icon: 'error',
+                confirmButtonText: 'Entendi'
             });
         });
     };

@@ -16,8 +16,10 @@ function ForgotPassword() {
 
         axios.post(`${process.env.REACT_APP_API_URL}/user/forgot`, email).finally(() => {
             Swal.fire({
-                title: 'Uma nova senha foi enviada para este usuário, caso exista.',
-                icon: 'success'
+                title: 'Enviado com sucesso!',
+                text: 'Uma nova senha foi enviada para este usuário, caso exista.',
+                icon: 'success',
+                confirmButtonText: 'Entendi'
             });
         });
     };

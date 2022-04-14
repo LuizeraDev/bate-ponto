@@ -31,12 +31,15 @@ function Dashboard() {
         }).then((res) => {
             Swal.fire({
                 title: 'Ponto batido com sucesso!',
-                icon: 'success'
+                text: 'Você receberá um email como forma de registro.',
+                icon: 'success',
+                confirmButtonText: 'Entendi'
             });
         }).catch(function (error) {
             Swal.fire({
                 title: 'Algo deu errado... :(',
-                icon: 'error'
+                icon: 'error',
+                confirmButtonText: 'Entendi'
             });
         });
     }
@@ -45,7 +48,7 @@ function Dashboard() {
         <Box>
             <Navbar/>
             {/* Main */}
-            <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
+            <Container maxWidth="sm" component="main" sx={{ pt: 10, pb: 6 }}>
                 <Typography
                     component="h1"
                     variant="h2"

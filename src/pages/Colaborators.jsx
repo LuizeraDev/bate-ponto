@@ -30,7 +30,7 @@ function Colaborators() {
         <Box>
             <Navbar />
             {/* Main */}
-            <Container maxWidth="sm" component="main" sx={{ pt: 10 }}>
+            <Container maxWidth="md" component="main" sx={{ pt: 10 }}>
                 <Typography
                     component="h1"
                     variant="h4"
@@ -49,10 +49,10 @@ function Colaborators() {
                     }}
                 >
                     <Button
-                        type="submit"
                         variant="contained"
                         sx={{ py: 0.6 }}
                         color="success"
+                        href="/register"
                     >
                         <AddBoxIcon />&nbsp;Adicionar
                     </Button>

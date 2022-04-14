@@ -55,13 +55,17 @@ function Profile() {
 
         if (name === '' || email === '' || cellphone === '') {
             Swal.fire({
-                title: 'Você não pode deixar certos campos em branco',
-                icon: 'error'
+                title: 'Campos em Branco',
+                text: 'Você não pode deixar os campos (nome, email e telefone) em branco.',
+                icon: 'error',
+                confirmButtonText: 'Entendi'
             });
         } else if (password !== '' && password.length < 6) {
             Swal.fire({
-                title: 'A nova senha precisa de ter mais de 6 caracteres',
-                icon: 'error'
+                title: 'Senha inválida',
+                text: 'A nova senha precisa de ter mais de 6 caracteres',
+                icon: 'error',
+                confirmButtonText: 'Entendi'
             });
         } else {
             axios.patch(`${process.env.REACT_APP_API_URL}/user/update`, userUpdated, {
@@ -71,12 +75,14 @@ function Profile() {
             }).then((res) => {
                 Swal.fire({
                     title: 'Atualizado com sucesso!',
-                    icon: 'success'
+                    icon: 'success',
+                    confirmButtonText: 'Entendi'
                 });
             }).catch(function (error) {
                 Swal.fire({
                     title: 'Houve um erro na atualização',
-                    icon: 'error'
+                    icon: 'error',
+                    confirmButtonText: 'Entendi'
                 });
             });
         }
