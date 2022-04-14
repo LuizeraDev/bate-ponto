@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function UserEdit() {  
     const { state } = useLocation();
@@ -16,6 +16,7 @@ function UserEdit() {
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
     const [cellphone, setCellphone] = useState('');
+    const [permission, setPermission] = useState();
 
     const handleSubmit = (event) => {
         const userToken = localStorage.getItem('token');
@@ -62,11 +63,14 @@ function UserEdit() {
         setEmail(response.data.user.email);
         setCpf(response.data.user.cpf);
         setCellphone(response.data.user.cellphone);
+        setPermission(response.data.user.isAdmin);
 
         return response.data.user;
     }
 
-    getUsers();
+    useEffect(() => {
+        getUsers();
+    }, [])
 
     return (
         <Box>
@@ -129,17 +133,21 @@ function UserEdit() {
                             name="cellphone"
                             value={cellphone}
                         />
+                        { permission !== undefined ?
                         <FormControl sx={{ mt: 1 }}>
                             <FormLabel>Permissão</FormLabel>
                             <RadioGroup
                                 row
                                 aria-labelledby="radio-button"
                                 name="isAdmin"
+                                defaultValue={permission}
                             >
                                 <FormControlLabel value="false" control={<Radio />} label="Usuário comum" />
                                 <FormControlLabel value="true" control={<Radio />} label="Usuário Administrador" />
                             </RadioGroup>
                         </FormControl>
+                        : <></>
+                        }
                         <Button
                             type="submit"
                             fullWidth
