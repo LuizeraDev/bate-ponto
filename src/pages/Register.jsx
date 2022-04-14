@@ -1,12 +1,15 @@
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import { Avatar, Box, Button, Container, TextField, Typography, RadioGroup, FormControl, FormLabel, FormControlLabel, Radio } from '@mui/material';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import axios from 'axios';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function Register() {
+    const navigate = useNavigate();
+    
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
@@ -75,6 +78,10 @@ function Register() {
                     title: 'Colaborador adicionado com sucesso!',
                     icon: 'success',
                     confirmButtonText: 'Entendi'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        navigate('/colaborators');
+                    }
                 });
             }).catch(function (error) {
                 Swal.fire({
@@ -100,7 +107,7 @@ function Register() {
                     }}
                 >
                     <Avatar sx={{ m: 1, width: 56, height: 56, bgcolor: 'primary.main' }}>
-                        <AccountCircleIcon sx={{ width: 40, height: 40 }} />
+                        <PersonAddAltIcon sx={{ width: 40, height: 40 }} />
                     </Avatar>
                     <Typography component="h4" variant="h4">
                         Novo Colaborador

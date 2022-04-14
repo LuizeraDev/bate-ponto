@@ -3,8 +3,10 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 function DenseTable(props) {
+  const navigate = useNavigate();
   const { users } = props;
 
   const userToken = localStorage.getItem('token');
@@ -34,6 +36,10 @@ function DenseTable(props) {
     })
   }
 
+  const editUser = (userId) => {
+    navigate('/user/edit', { state: userId });
+  }
+
   return (
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 100 }} size="medium" aria-label="a dense table">
@@ -60,6 +66,7 @@ function DenseTable(props) {
                   variant="contained"
                   sx={{ py: 0.6 }}
                   color="info"
+                  onClick={() => { editUser(user._id) }}
                 >
                   <EditIcon />
                 </Button>
