@@ -40,38 +40,78 @@ function ForgotPassword() {
                 <Typography component="h4" variant="h4">
                     Recuperar Senha
                 </Typography>
-                <Box sx={{ width: 396, height: 40, mt: 2, mb: 1 }}>
-                    <Typography component="h4" variant="body1">
-                        Preencha abaixo para enviarmos um email contendo uma nova senha.
-                    </Typography>
+                {/* Desktop */}
+                <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                    <Box sx={{ width: 396, height: 40, mt: 2, mb: 1 }}>
+                        <Typography component="h4" variant="body1">
+                            Preencha abaixo para enviarmos um email contendo uma nova senha.
+                        </Typography>
+                    </Box>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 396 }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ py: 1.9, mt: 3, mb: 2 }}
+                            size="large"
+                        >
+                            Enviar
+                        </Button>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row-reverse',
+                            }}
+                        >
+                            <Link href="/login">Voltar ao Inicio</Link>
+                        </Box>
+                    </Box>
                 </Box>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 396 }}>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="email"
-                        label="Email"
-                        name="email"
-                        autoComplete="email"
-                        autoFocus
-                    />
-                    <Button
-                        type="submit"
-                        fullWidth
-                        variant="contained"
-                        sx={{ py: 1.9, mt: 3, mb: 2 }}
-                        size="large"
-                    >
-                        Enviar
-                    </Button>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            flexDirection: 'row-reverse',
-                        }}
-                    >
-                        <Link href="/login">Voltar ao Inicio</Link>
+                {/* Mobile */}
+                <Box sx={{ display: { md: 'none' } }}>
+                    <Box sx={{ width: 343, height: 40, mt: 2, mb: 1 }}>
+                        <Typography component="h4" variant="body1">
+                            Preencha abaixo para enviarmos um email contendo uma nova senha.
+                        </Typography>
+                    </Box>
+                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1, width: 343 }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="email"
+                            label="Email"
+                            name="email"
+                            autoComplete="email"
+                            autoFocus
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            sx={{ py: 1.9, mt: 3, mb: 2 }}
+                            size="large"
+                        >
+                            Enviar
+                        </Button>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                flexDirection: 'row-reverse',
+                            }}
+                        >
+                            <Link href="/login">Voltar ao Inicio</Link>
+                        </Box>
                     </Box>
                 </Box>
             </Box>
