@@ -4,18 +4,35 @@ import EditIcon from '@mui/icons-material/Edit';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 
-function DenseTable(props) {
+function DenseTable() {
   const navigate = useNavigate();
-  const { users } = props;
-
-  const userToken = localStorage.getItem('token');
+  const [users, setUsers] = useState([]);
 
   const checkAdministrator = (isAdmin) => {
     return isAdmin ? 'Sim' : 'Não';
   }
 
+  const getUsers = async () => {
+      const userToken = localStorage.getItem('token');
+
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/users/list`, {
+          headers: {
+              'Authorization': `Bearer ${userToken}`
+          },
+      });
+      setUsers(response.data.users);
+
+      return response.data.users;
+  }
+
+  useEffect(() => {
+      getUsers()
+  }, []);
+
   const removeUser = (userId) => {
+    const userToken = localStorage.getItem('token');
     Swal.fire({
       title: 'remover este colaborador?',
       text: 'Essa ação não poderá ser desfeita.',
@@ -31,6 +48,7 @@ function DenseTable(props) {
             },
         }).then(res => {
           Swal.fire('Removido com sucesso!', '', 'success');
+          getUsers();
         })
       } 
     })

@@ -6,10 +6,11 @@ import axios from 'axios';
 import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
+import InputMask from "react-input-mask";
 
 function Register() {
     const navigate = useNavigate();
-    
+
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [cpf, setCpf] = useState('');
@@ -61,7 +62,7 @@ function Register() {
                 icon: 'error',
                 confirmButtonText: 'Entendi'
             });
-        } else if(password !== confirmPassword){
+        } else if (password !== confirmPassword) {
             Swal.fire({
                 title: 'Senhas não coincidem',
                 text: 'As senhas informadas não são iguais.',
@@ -134,26 +135,42 @@ function Register() {
                             autoComplete="email"
                             onChange={(e) => setEmail(e.target.value)}
                         />
-                        <TextField
-                            error={cpfError}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="cpf"
-                            label="CPF"
-                            name="cpf"
+                        <InputMask
+                            mask="999.999.999-99"
+                            disabled={false}
+                            alwaysShowMask={false}
                             onChange={(e) => setCpf(e.target.value)}
-                        />
-                        <TextField
-                            error={cellphoneError}
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="cellphone"
-                            label="Celular"
-                            name="cellphone"
+                        >
+                            {() => 
+                            <TextField
+                                error={cpfError}
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="cpf"
+                                label="CPF"
+                                name="cpf"
+                            />
+                            }
+                        </InputMask>
+                        <InputMask
+                            mask="(99) 9999-99999"
+                            disabled={false}
+                            alwaysShowMask={false}
                             onChange={(e) => setCellphone(e.target.value)}
-                        />
+                        >
+                            {() => 
+                            <TextField
+                                error={cellphoneError}
+                                margin="normal"
+                                required
+                                fullWidth
+                                id="cellphone"
+                                label="Celular"
+                                name="cellphone"
+                            />
+                            }
+                        </InputMask>
                         <TextField
                             error={passwordError}
                             margin="normal"
