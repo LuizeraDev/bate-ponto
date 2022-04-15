@@ -70,7 +70,7 @@ function Register() {
                 confirmButtonText: 'Entendi'
             });
         } else {
-            axios.post(`${process.env.REACT_APP_API_URL}/admin/user/new`, newUser, {
+            axios.post(`${process.env.REACT_APP_API_URL}/user/admin`, newUser, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },

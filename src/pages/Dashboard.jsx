@@ -24,7 +24,7 @@ function Dashboard() {
             start: new Date()
         };
 
-        axios.post(`${process.env.REACT_APP_API_URL}/appointment/new`, timeStart, {
+        axios.post(`${process.env.REACT_APP_API_URL}/appointment`, timeStart, {
             headers: {
                 'Authorization': `Bearer ${userToken}`
             },

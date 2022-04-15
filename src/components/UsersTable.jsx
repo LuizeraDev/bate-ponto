@@ -17,7 +17,7 @@ function DenseTable() {
   const getUsers = async () => {
       const userToken = localStorage.getItem('token');
 
-      const response = await axios.get(`${process.env.REACT_APP_API_URL}/admin/users/list`, {
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
           headers: {
               'Authorization': `Bearer ${userToken}`
           },
@@ -42,7 +42,7 @@ function DenseTable() {
       confirmButtonColor: '#d32f2f'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${process.env.REACT_APP_API_URL}/admin/user/remove/${userId}`, {
+        axios.delete(`${process.env.REACT_APP_API_URL}/user/${userId}/admin`, {
           headers: {
                 'Authorization': `Bearer ${userToken}`
             },
