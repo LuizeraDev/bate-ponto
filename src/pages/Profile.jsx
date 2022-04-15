@@ -18,10 +18,11 @@ function Profile() {
     const [passwordError, setPasswordError] = useState(false);
 
     useEffect(() => {
+        const userId = localStorage.getItem('userId');
         const userToken = localStorage.getItem('token');
 
         const getUser = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },
@@ -37,6 +38,7 @@ function Profile() {
     const handleSubmit = (event) => {
         event.preventDefault();
 
+        const userId = localStorage.getItem('userId');
         const userToken = localStorage.getItem('token');
 
         name === '' ? setNameError(true) : setNameError(false);
@@ -69,7 +71,7 @@ function Profile() {
                 confirmButtonText: 'Entendi'
             });
         } else {
-            axios.patch(`${process.env.REACT_APP_API_URL}/user/update`, userUpdated, {
+            axios.patch(`${process.env.REACT_APP_API_URL}/user/${userId}`, userUpdated, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },
