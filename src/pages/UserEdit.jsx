@@ -28,7 +28,7 @@ function UserEdit() {
             isAdmin: data.get('isAdmin')
         };
 
-        axios.patch(`${process.env.REACT_APP_API_URL}/user/${userId}/admin`, editUser, {
+        axios.patch(`${process.env.REACT_APP_API_URL}/user/${userId}`, editUser, {
             headers: {
                 'Authorization': `Bearer ${userToken}`
             },
@@ -51,7 +51,7 @@ function UserEdit() {
         });
     };
 
-    const getUsers = async () => {
+    const getUser = async () => {
         const userToken = localStorage.getItem('token');
         const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
             headers: {
@@ -69,7 +69,7 @@ function UserEdit() {
     }
 
     useEffect(() => {
-        getUsers();
+        getUser();
     }, [])
 
     return (
