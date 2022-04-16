@@ -81,6 +81,7 @@ function Navbar() {
                 <Link
                     variant="button"
                     color="inherit"
+                    onClick={Logout}
                     href="/login"
                     sx={{
                         my: 1, mx: 1.5
