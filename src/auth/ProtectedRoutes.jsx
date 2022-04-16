@@ -23,9 +23,11 @@ const verifyToken = async () => {
             const verifyRefresh = await verifyRefreshToken(user.refreshToken);
             return verifyRefresh ? true : false;
         }
+
+        return true;
     }
 
-    return true;
+    return false;
 };
 
 const verifyRefreshToken = async (refresh) => {
