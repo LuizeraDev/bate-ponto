@@ -22,7 +22,7 @@ function Appointments() {
         }
 
         const getAppointmentsByDate = async () => {
-            const response = await axios.post(`${process.env.REACT_APP_API_URL}/appointment/date`, filter, {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/search?date=${filter.date}`, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },

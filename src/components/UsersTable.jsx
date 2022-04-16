@@ -42,7 +42,7 @@ function DenseTable() {
       confirmButtonColor: '#d32f2f'
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${process.env.REACT_APP_API_URL}/user/${userId}/admin`, {
+        axios.delete(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
           headers: {
                 'Authorization': `Bearer ${userToken}`
             },
