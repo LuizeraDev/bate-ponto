@@ -89,7 +89,7 @@ function UserEdit() {
                         <AccountCircleIcon sx={{ width: 40, height: 40 }} />
                     </Avatar>
                     <Typography component="h4" variant="h4">
-                        Editar Colaborador
+                        Editar Permissão
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
@@ -155,7 +155,7 @@ function UserEdit() {
                             sx={{ py: 1.9, mt: 3, mb: 2 }}
                             size="large"
                         >
-                            Adicionar Colaborador
+                            Atualizar Permissão
                         </Button>
                     </Box>
                 </Box>
