@@ -15,6 +15,11 @@ function Navbar() {
         setAnchorElNav(null);
     };
 
+    const Logout = () => {
+        localStorage.clear();
+        setAnchorElNav(null);
+    }
+
     return (
         <AppBar
             position="static"
@@ -76,6 +81,7 @@ function Navbar() {
                 <Link
                     variant="button"
                     color="inherit"
+                    onClick={Logout}
                     href="/login"
                     sx={{
                         my: 1, mx: 1.5
@@ -151,7 +157,7 @@ function Navbar() {
                         <Typography>Perfil</Typography>
                     </MenuItem>
                     <MenuItem
-                        onClick={handleCloseNavMenu}
+                        onClick={Logout}
                         component="a"
                         href='/login'
                     >

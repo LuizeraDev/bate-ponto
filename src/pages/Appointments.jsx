@@ -1,4 +1,4 @@
-import { Box, Container, TextField, Typography } from '@mui/material';
+import { Box, Container, TextField, Typography, Grid } from '@mui/material';
 import { AdapterDateFns } from '@mui/x-date-pickers/AdapterDateFns';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
@@ -12,17 +12,20 @@ import moment from 'moment';
 
 function Appointments() {
     const [appointments, setAppointments] = useState([]);
-    const [date, setDate] = useState(moment());
 
-    const getAppointments = (newDate) => {
+    const [dateStart, setDateStart] = useState(moment()); 
+    const [dateEnd, setDateEnd] = useState(moment());
+
+    const getAppointments = (newDateStart, newDateEnd) => {
         const userToken = localStorage.getItem('token');
 
         const filter = {
-            date: moment(newDate).subtract(3, "hours")
+            start: moment(newDateStart).subtract(3, "hours"),
+            end: moment(newDateEnd).subtract(3, "hours"),
         }
 
         const getAppointmentsByDate = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/search?date=${filter.date}`, {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/search?start=${filter.start}&end=${filter.end}`, {
                 headers: {
                     'Authorization': `Bearer ${userToken}`
                 },
@@ -51,27 +54,55 @@ function Appointments() {
                 >
                     Meus Apontamentos
                 </Typography>
-                <Box
-                    sx={{
-                        mt: 5,
-                        mb: 5,
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
-                        <DatePicker
-                            label="Buscar por data"
-                            value={date}
-                            onChange={(newDate) => {
-                                setDate(newDate);
-                                getAppointments(newDate);
+                {/* Date Pickers */}
+                <Grid container spacing={2}>
+                    <Grid item xs={6}>
+                        <Box
+                            sx={{
+                                mt: 5,
+                                mb: 5,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
                             }}
-                            renderInput={(params) => <TextField {...params} />}
-                        />
-                    </LocalizationProvider>
-                </Box>
+                        >
+                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+                                <DatePicker
+                                    label="Data Início"
+                                    value={dateStart}
+                                    onChange={(newDateStart) => {
+                                        setDateStart(newDateStart);
+                                        getAppointments(newDateStart, dateEnd);
+                                    }}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        </Box>
+                    </Grid>
+                    <Grid item xs={6}>
+                        <Box
+                            sx={{
+                                mt: 5,
+                                mb: 5,
+                                display: 'flex',
+                                flexDirection: 'column',
+                                alignItems: 'center',
+                            }}
+                        >
+                            <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+                                <DatePicker
+                                    label="Data Fim"
+                                    value={dateEnd}
+                                    onChange={(newDateEnd) => {
+                                        setDateEnd(newDateEnd);
+                                        getAppointments(dateStart, newDateEnd);
+                                    }}
+                                    renderInput={(params) => <TextField {...params} />}
+                                />
+                            </LocalizationProvider>
+                        </Box>
+                    </Grid>
+                </Grid>
                 <Table appointments={appointments} />
                 {/* Footer */}
                 <Container
