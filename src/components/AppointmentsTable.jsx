@@ -1,4 +1,4 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper }from '@mui/material';
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import moment from 'moment';
 
 function DenseTable(props) {
@@ -27,18 +27,22 @@ function DenseTable(props) {
           </TableRow>
         </TableHead>
         <TableBody>
-          {appointments.map((ap) => (
-            <TableRow
-              key={ap._id}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" align="left" scope="row">
-                {formatDate(ap.start)}
-              </TableCell>
-              <TableCell align="center">{formatTime(ap.start)}</TableCell>
-              <TableCell align="center">{formatTime(ap.end)}</TableCell>
-            </TableRow>
-          ))}
+          {appointments
+            .sort(function (a, b) {
+              return new Date(a.start) - new Date(b.end);
+            })
+            .map((ap) => (
+              <TableRow
+                key={ap._id}
+                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+              >
+                <TableCell component="th" align="left" scope="row">
+                  {formatDate(ap.start)}
+                </TableCell>
+                <TableCell align="center">{formatTime(ap.start)}</TableCell>
+                <TableCell align="center">{formatTime(ap.end)}</TableCell>
+              </TableRow>
+            ))}
         </TableBody>
       </Table>
     </TableContainer>
