@@ -9,31 +9,41 @@ import Navbar from '../components/Navbar';
 import Table from '../components/AppointmentsTable';
 import axios from 'axios';
 import moment from 'moment';
+import Swal from 'sweetalert2';
 
 function Appointments() {
     const [appointments, setAppointments] = useState([]);
 
-    const [dateStart, setDateStart] = useState(moment()); 
+    const [dateStart, setDateStart] = useState(moment());
     const [dateEnd, setDateEnd] = useState(moment());
 
     const getAppointments = (newDateStart, newDateEnd) => {
         const userToken = localStorage.getItem('token');
 
-        const filter = {
-            start: moment(newDateStart),
-            end: moment(newDateEnd),
-        }
-
-        const getAppointmentsByDate = async () => {
-            const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/search?start=${filter.start}&end=${filter.end}`, {
-                headers: {
-                    'Authorization': `Bearer ${userToken}`
-                },
+        if (moment(newDateEnd).isBefore(newDateStart)) {
+            Swal.fire({
+                title: 'Data Fim',
+                text: 'A data de fim não pode anteceder a data de início.',
+                icon: 'error',
+                confirmButtonText: 'Entendi'
             });
-            setAppointments(response.data);
+        } else {
+            const filter = {
+                start: moment(newDateStart),
+                end: moment(newDateEnd),
+            }
+    
+            const getAppointmentsByDate = async () => {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/search?start=${filter.start}&end=${filter.end}`, {
+                    headers: {
+                        'Authorization': `Bearer ${userToken}`
+                    },
+                });
+                setAppointments(response.data);
+            }
+    
+            return getAppointmentsByDate();
         }
-
-        return getAppointmentsByDate();
     }
 
     useEffect(() => {
