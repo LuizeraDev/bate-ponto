@@ -9,7 +9,7 @@ import { useState, useEffect } from 'react';
 function DenseTable(props) {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
-  
+
   const { userName } = props;
 
   const [page, setPage] = useState(0);
@@ -37,9 +37,9 @@ function DenseTable(props) {
     return response.data.users;
   }
 
-  useEffect(() => {
-    getUsers(userName)
-  }, [userName]);
+  const editUser = (userId) => {
+    navigate('/user/edit', { state: userId });
+  }
 
   const removeUser = (userId) => {
     const userToken = localStorage.getItem('token');
@@ -64,9 +64,9 @@ function DenseTable(props) {
     })
   }
 
-  const editUser = (userId) => {
-    navigate('/user/edit', { state: userId });
-  }
+  useEffect(() => {
+    getUsers(userName)
+  }, [userName]);
 
   return (
     <TableContainer component={Paper}>
