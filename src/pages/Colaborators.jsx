@@ -1,10 +1,15 @@
-import { Button, Box, Container, Typography } from '@mui/material';
+import { Button, Box, Grid, Container, TextField, Typography, InputAdornment } from '@mui/material';
 import Copyright from '../components/Copyright';
 import Navbar from '../components/Navbar';
 import Table from '../components/UsersTable';
-import AddBoxIcon from '@mui/icons-material/AddBox';
+import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
+import SearchIcon from '@mui/icons-material/Search';
+import TextSnippetIcon from '@mui/icons-material/TextSnippet';
+import { useState } from 'react';
 
-function Colaborators() {
+function Colaborators() { 
+    const [user, setUser] = useState([]);
+
     return (
         <Box>
             <Navbar />
@@ -19,24 +24,121 @@ function Colaborators() {
                 >
                     Meus Colaboradores
                 </Typography>
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'row-reverse',
-                        mt: 5,
-                        mb: 5
-                    }}
-                >
-                    <Button
-                        variant="contained"
-                        sx={{ py: 0.6 }}
-                        color="success"
-                        href="/register"
-                    >
-                        <AddBoxIcon />&nbsp;Adicionar
-                    </Button>
+                {/* header */}
+                <Box sx={{ display: { xs: 'none', md: 'block' } }}>
+                    <Grid container spacing={2}>
+                        <Grid item xs={6}>
+                            <Box
+                                sx={{
+                                    mt: 3,
+                                    mb: 5,
+                                    display: 'flex',
+                                    flexDirection: 'column',
+                                }}
+                            >
+                                <TextField
+                                    margin="normal"
+                                    fullWidth
+                                    id="search"
+                                    name="search"
+                                    label="Buscar colaborador"
+                                    placeholder="Exemplo: Luiz Guilherme"
+                                    onChange={(e) => setUser(e.target.value)}
+                                    size="small"
+                                    InputProps={{
+                                        startAdornment: (
+                                            <InputAdornment position="start">
+                                                <SearchIcon></SearchIcon>
+                                            </InputAdornment>
+                                        ),
+                                    }}
+                                />
+                            </Box>
+                        </Grid>
+                        <Grid item xs={6}>
+                            <Box
+                                sx={{
+                                    display: 'flex',
+                                    flexDirection: 'row-reverse',
+                                    mt: 5,
+                                    mb: 5
+                                }}
+                            >
+                                <Button
+                                    variant="contained"
+                                    sx={{ ml: 2, py: 1 }}
+                                    color="success"
+                                    href="/register"
+                                >
+                                    <PersonAddAltIcon />&nbsp;Novo&nbsp;Colaborador
+                                </Button>
+                                <Button
+                                    variant="contained"
+                                    sx={{ py: 1 }}
+                                    color="warning"
+                                >
+                                    <TextSnippetIcon />&nbsp;Relatório&nbsp;Mensal
+                                </Button>
+                            </Box>
+                        </Grid>
+                    </Grid>
                 </Box>
-                <Table />
+                {/* mobile */}
+                <Box sx={{ display: { md: 'none' } }}>
+                    <Box
+                        sx={{
+                            mt: 3,
+                            mb: 3,
+                            display: 'flex',
+                            flexDirection: 'row-reverse',
+                            alignItems: 'center',
+                            justifyContent: 'center'
+                        }}
+                    >
+                        <Button
+                            variant="contained"
+                            sx={{ ml: 2, py: 1 }}
+                            color="success"
+                            href="/register"
+                        >
+                            <PersonAddAltIcon />&nbsp;Novo&nbsp;Colaborador
+                        </Button>
+                        <Button
+                            variant="contained"
+                            sx={{ py: 1 }}
+                            color="warning"
+                        >
+                            <TextSnippetIcon />&nbsp;Relatório&nbsp;Mensal
+                        </Button>
+                    </Box>
+                    <Box
+                        sx={{
+                            mt: 3,
+                            mb: 3,
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}
+                    >
+                        <TextField
+                            margin="normal"
+                            fullWidth
+                            id="search"
+                            name="search"
+                            label="Buscar colaborador"
+                            placeholder="Exemplo: Luiz Guilherme"
+                            onChange={(e) => setUser(e.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon></SearchIcon>
+                                    </InputAdornment>
+                                ),
+                            }}
+                        />
+                    </Box>
+                </Box>
+                {/* Table */}
+                <Table userName={user} />
                 {/* Footer */}
                 <Container
                     maxWidth="md"
