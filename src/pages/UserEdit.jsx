@@ -64,13 +64,11 @@ function UserEdit() {
         setCpf(response.data.user.cpf);
         setCellphone(response.data.user.cellphone);
         setPermission(response.data.user.isAdmin);
-
-        return response.data.user;
     }
 
     useEffect(() => {
         getUser();
-    }, [])
+    }, []);
 
     return (
         <Box>
