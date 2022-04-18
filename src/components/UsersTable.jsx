@@ -6,9 +6,11 @@ import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 
-function DenseTable() {
+function DenseTable(props) {
   const navigate = useNavigate();
   const [users, setUsers] = useState([]);
+
+  const { userName } = props;
 
   const [page, setPage] = useState(0);
   const rowsPerPage = 5;
@@ -22,10 +24,10 @@ function DenseTable() {
     return isAdmin ? 'Sim' : 'Não';
   }
 
-  const getUsers = async () => {
+  const getUsers = async (userName) => {
     const userToken = localStorage.getItem('token');
 
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
+    const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/employee?name=${userName}`, {
       headers: {
         'Authorization': `Bearer ${userToken}`
       },
@@ -35,9 +37,9 @@ function DenseTable() {
     return response.data.users;
   }
 
-  useEffect(() => {
-    getUsers()
-  }, []);
+  const editUser = (userId) => {
+    navigate('/user/edit', { state: userId });
+  }
 
   const removeUser = (userId) => {
     const userToken = localStorage.getItem('token');
@@ -62,9 +64,9 @@ function DenseTable() {
     })
   }
 
-  const editUser = (userId) => {
-    navigate('/user/edit', { state: userId });
-  }
+  useEffect(() => {
+    getUsers(userName)
+  }, [userName]);
 
   return (
     <TableContainer component={Paper}>

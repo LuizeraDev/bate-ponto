@@ -13,15 +13,15 @@ import moment from 'moment';
 function Appointments() {
     const [appointments, setAppointments] = useState([]);
 
-    const [dateStart, setDateStart] = useState(moment()); 
+    const [dateStart, setDateStart] = useState(moment());
     const [dateEnd, setDateEnd] = useState(moment());
 
     const getAppointments = (newDateStart, newDateEnd) => {
         const userToken = localStorage.getItem('token');
 
         const filter = {
-            start: moment(newDateStart).subtract(3, "hours"),
-            end: moment(newDateEnd).subtract(3, "hours"),
+            start: moment(newDateStart),
+            end: moment(newDateEnd),
         }
 
         const getAppointmentsByDate = async () => {
