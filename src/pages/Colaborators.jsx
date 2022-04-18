@@ -4,8 +4,8 @@ import Navbar from '../components/Navbar';
 import Table from '../components/UsersTable';
 import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import SearchIcon from '@mui/icons-material/Search';
-import TextSnippetIcon from '@mui/icons-material/TextSnippet';
 import { useState } from 'react';
+import ReportButton from '../components/ReportButton';
 
 function Colaborators() { 
     const [user, setUser] = useState([]);
@@ -72,13 +72,7 @@ function Colaborators() {
                                 >
                                     <PersonAddAltIcon />&nbsp;Novo&nbsp;Colaborador
                                 </Button>
-                                <Button
-                                    variant="contained"
-                                    sx={{ py: 1 }}
-                                    color="warning"
-                                >
-                                    <TextSnippetIcon />&nbsp;Relatório&nbsp;Mensal
-                                </Button>
+                                <ReportButton />
                             </Box>
                         </Grid>
                     </Grid>
@@ -103,13 +97,7 @@ function Colaborators() {
                         >
                             <PersonAddAltIcon />&nbsp;Novo&nbsp;Colaborador
                         </Button>
-                        <Button
-                            variant="contained"
-                            sx={{ py: 1 }}
-                            color="warning"
-                        >
-                            <TextSnippetIcon />&nbsp;Relatório&nbsp;Mensal
-                        </Button>
+                        <ReportButton />
                     </Box>
                     <Box
                         sx={{
