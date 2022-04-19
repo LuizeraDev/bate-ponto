@@ -45,14 +45,14 @@ function MassiveInsertButton() {
                     title: 'Colaboradores cadastrados!',
                     text: 'Todos os colaboradores foram cadastrados com sucesso!',
                     icon: 'success',
-                    confirmButtonText: 'Valeu!'
+                    confirmButtonText: 'Entendi'
                 });
             }).catch(function (error) {
                 Swal.fire({
                     title: 'Houve um erro :(',
                     text: 'Cheque as informações da sua planilha, verifique se o usuário já não está cadastrado.',
                     icon: 'error',
-                    confirmButtonText: 'Que pena!'
+                    confirmButtonText: 'Entendi'
                 });
             });
         });
