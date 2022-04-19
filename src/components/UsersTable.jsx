@@ -58,7 +58,7 @@ function DenseTable(props) {
           },
         }).then(res => {
           Swal.fire('Removido com sucesso!', '', 'success');
-          getUsers();
+          getUsers('');
         })
       }
     })
