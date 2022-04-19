@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Swal from 'sweetalert2';
 import { useNavigate } from 'react-router-dom';
 import InputMask from "react-input-mask";
+import PeopleIcon from '@mui/icons-material/People';
 
 function Register() {
     const navigate = useNavigate();
@@ -113,6 +114,33 @@ function Register() {
                     <Typography component="h4" variant="h4">
                         Novo Colaborador
                     </Typography>
+                    {/* Massive insert Desktop */}
+                    <Box
+                        sx={{
+                            ml: 22.5,
+                            display: { xs: 'none', md: 'block' }
+                        }}
+                    >
+                        <Button
+                            sx={{ mt: 2 }}
+                            variant="contained"
+                            color="success"
+                            href="/register/massive"
+                        >
+                            <PeopleIcon /> &nbsp; Inserção em massa
+                        </Button>
+                    </Box>
+                    {/* Massive insert Mobile */}
+                    <Button
+                        sx={{ mt: 2, display: { md: 'none' }}}
+                        variant="contained"
+                        color="success"
+                        href="/register/massive"
+                        fullWidth
+                    >
+                        <PeopleIcon /> &nbsp; Inserção em massa
+                    </Button>
+
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
                             error={nameError}
@@ -141,16 +169,16 @@ function Register() {
                             alwaysShowMask={false}
                             onChange={(e) => setCpf(e.target.value)}
                         >
-                            {() => 
-                            <TextField
-                                error={cpfError}
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="cpf"
-                                label="CPF"
-                                name="cpf"
-                            />
+                            {() =>
+                                <TextField
+                                    error={cpfError}
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="cpf"
+                                    label="CPF"
+                                    name="cpf"
+                                />
                             }
                         </InputMask>
                         <InputMask
@@ -159,16 +187,16 @@ function Register() {
                             alwaysShowMask={false}
                             onChange={(e) => setCellphone(e.target.value)}
                         >
-                            {() => 
-                            <TextField
-                                error={cellphoneError}
-                                margin="normal"
-                                required
-                                fullWidth
-                                id="cellphone"
-                                label="Celular"
-                                name="cellphone"
-                            />
+                            {() =>
+                                <TextField
+                                    error={cellphoneError}
+                                    margin="normal"
+                                    required
+                                    fullWidth
+                                    id="cellphone"
+                                    label="Celular"
+                                    name="cellphone"
+                                />
                             }
                         </InputMask>
                         <TextField
