@@ -6,7 +6,7 @@ function DenseTable(props) {
   const { appointments } = props;
 
   const [page, setPage] = useState(0);
-  const rowsPerPage = 5;
+  const rowsPerPage = 10;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
