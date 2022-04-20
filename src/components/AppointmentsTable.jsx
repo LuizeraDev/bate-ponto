@@ -1,8 +1,16 @@
-import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
+import { Table, TableBody, TableFooter, TablePagination, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 import moment from 'moment';
+import { useState } from 'react';
 
 function DenseTable(props) {
   const { appointments } = props;
+
+  const [page, setPage] = useState(0);
+  const rowsPerPage = 5;
+
+  const handleChangePage = (event, newPage) => {
+    setPage(newPage);
+  };
 
   const formatDate = (date) => {
     const fullDate = moment.utc(date).format('DD/MM/YYYY');
@@ -28,8 +36,9 @@ function DenseTable(props) {
         </TableHead>
         <TableBody>
           {appointments
+            .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
             .sort(function (a, b) {
-              return new Date(a.start) - new Date(b.end);
+              return moment(a.start) - moment(b.end);
             })
             .map((ap) => (
               <TableRow
@@ -44,6 +53,17 @@ function DenseTable(props) {
               </TableRow>
             ))}
         </TableBody>
+        <TableFooter>
+          <TableRow>
+            <TablePagination
+              rowsPerPageOptions={[rowsPerPage]}
+              count={appointments.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              onPageChange={handleChangePage}
+            />
+          </TableRow>
+        </TableFooter>
       </Table>
     </TableContainer>
   );

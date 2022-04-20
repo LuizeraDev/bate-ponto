@@ -68,6 +68,8 @@ function Appointments() {
                         >
                             <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
                                 <DatePicker
+                                    minDate
+                                    maxDate
                                     label="Data Início"
                                     value={dateStart}
                                     onChange={(newDateStart) => {
@@ -91,6 +93,8 @@ function Appointments() {
                         >
                             <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
                                 <DatePicker
+                                    minDate
+                                    maxDate
                                     label="Data Fim"
                                     value={dateEnd}
                                     onChange={(newDateEnd) => {
