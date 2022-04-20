@@ -122,7 +122,7 @@ function DenseTable(props) {
         <TableFooter>
           <TableRow>
             <TablePagination
-              rowsPerPageOptions={[5]}
+              rowsPerPageOptions={[rowsPerPage]}
               count={users.length}
               rowsPerPage={rowsPerPage}
               page={page}
