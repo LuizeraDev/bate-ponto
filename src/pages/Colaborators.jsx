@@ -22,7 +22,7 @@ function Colaborators() {
                     color="text.primary"
                     gutterBottom
                 >
-                    Meus Colaboradores
+                    Colaboradores
                 </Typography>
                 {/* header */}
                 <Box sx={{ display: { xs: 'none', md: 'block' } }}>

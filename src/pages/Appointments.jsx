@@ -52,7 +52,7 @@ function Appointments() {
                     color="text.primary"
                     gutterBottom
                 >
-                    Meus Apontamentos
+                    Apontamentos
                 </Typography>
                 {/* Date Pickers */}
                 <Grid container spacing={2}>

@@ -103,7 +103,7 @@ function Profile() {
                     }}
                 >
                     <Typography component="h3" variant="h4">
-                        Meus dados
+                        Perfil
                     </Typography>
                     <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
                         <TextField
