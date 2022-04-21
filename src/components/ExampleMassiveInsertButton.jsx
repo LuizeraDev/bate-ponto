@@ -9,7 +9,7 @@ function ExampleMassiveInsertButton() {
             {
                 name: "teste",
                 email: "teste@gmail.com",
-                password: "123456",
+                password: "teste123",
                 cellphone: "(13) 98155-2312",
                 cpf: "575.492.080-69",
                 isAdmin: false
@@ -17,7 +17,7 @@ function ExampleMassiveInsertButton() {
             {
                 name: "teste123",
                 email: "teste123@gmail.com",
-                password: "123456",
+                password: "teste123",
                 cellphone: "(13) 98112-5312",
                 cpf: "531.735.470-63",
                 isAdmin: true
