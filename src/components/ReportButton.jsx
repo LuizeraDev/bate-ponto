@@ -8,7 +8,7 @@ import moment from 'moment';
 function Report() {
     const exportToCSV = async () => {
         const userToken = localStorage.getItem('token');
-        const response = await axios.get(`${process.env.REACT_APP_API_URL}/user`, {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/appointment/findall?date=${moment()}`, {
             headers: {
                 'Authorization': `Bearer ${userToken}`
             },
@@ -16,13 +16,15 @@ function Report() {
 
         const date = moment().format('DD-MM-YYYY-hh.mm.ss');
         
-        const users = response.data.users;
+        const users = response.data;
 
         const dataFormated = users.map((user) => {
+            console.log(user);
             const usersInfo = {
                 Nome: user.name,
                 Cpf: user.cpf,
-                Horas_Apontadas: ''  
+                Minutos_Extras: user.extraMinutes,
+                Minutos_Faltantes: user.faultMinutes
             }
 
             return usersInfo;
