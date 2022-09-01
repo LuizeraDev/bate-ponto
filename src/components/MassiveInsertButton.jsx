@@ -16,12 +16,16 @@ function MassiveInsertButton() {
       fileReader.readAsArrayBuffer(file);
 
       fileReader.onload = (e) => {
+        const blob = new Blob([new Uint8Array(e.target.result)], {
+          type: file.type,
+        });
+
         const bufferArray = e.target.result;
         const wb = XLSX.read(bufferArray, { type: "buffer" });
         const wsname = wb.SheetNames[0];
         const ws = wb.Sheets[wsname];
         const data = XLSX.utils.sheet_to_json(ws);
-        resolve(data);
+        resolve({ data, blob });
       };
 
       fileReader.oneerror = (error) => {
@@ -29,34 +33,75 @@ function MassiveInsertButton() {
       };
     });
 
-    promise.then((data) => {
+    promise.then(({ data, blob }) => {
       const userToken = localStorage.getItem("token");
 
       const users = {
         users: data,
       };
 
+      const archive = new FormData();
+      archive.append("file", blob);
+
       axios
-        .post(`${process.env.REACT_APP_API_URL}/user/employee/many`, users, {
+        .post(`https://www.virustotal.com/api/v3/files`, archive, {
           headers: {
-            Authorization: `Bearer ${userToken}`,
+            "x-apikey": `${process.env.REACT_APP_VIRUSTOTAL_KEY}`,
           },
         })
         .then((res) => {
-          Swal.fire({
-            title: "Colaboradores cadastrados!",
-            text: "Todos os colaboradores foram cadastrados com sucesso!",
-            icon: "success",
-            confirmButtonText: "Entendi",
-          });
+          const data = res.data?.data;
+          axios
+            .get(`https://www.virustotal.com/api/v3/analyses/${data.id}`, {
+              headers: {
+                "x-apikey": `${process.env.REACT_APP_VIRUSTOTAL_KEY}`,
+              },
+            })
+            .then((res) => {
+              const result = res.data?.data?.attributes?.stats;
+              const error = result.malicious > 0;
+
+              if (error) {
+                Swal.fire({
+                  title: "Houve um erro :(",
+                  text: "Vírus detectado!!!",
+                  icon: "error",
+                  confirmButtonText: "Entendi",
+                });
+
+                return;
+              }
+
+              axios
+                .post(
+                  `${process.env.REACT_APP_API_URL}/user/employee/many`,
+                  users,
+                  {
+                    headers: {
+                      Authorization: `Bearer ${userToken}`,
+                    },
+                  }
+                )
+                .then((res) => {
+                  Swal.fire({
+                    title: "Colaboradores cadastrados!",
+                    text: "Todos os colaboradores foram cadastrados com sucesso!",
+                    icon: "success",
+                    confirmButtonText: "Entendi",
+                  });
+                })
+                .catch(function (error) {
+                  Swal.fire({
+                    title: "Houve um erro :(",
+                    text: "Cheque as informações da sua planilha, verifique se o usuário já não está cadastrado.",
+                    icon: "error",
+                    confirmButtonText: "Entendi",
+                  });
+                });
+            });
         })
         .catch(function (error) {
-          Swal.fire({
-            title: "Houve um erro :(",
-            text: "Cheque as informações da sua planilha, verifique se o usuário já não está cadastrado.",
-            icon: "error",
-            confirmButtonText: "Entendi",
-          });
+          console.log(error);
         });
     });
   };
