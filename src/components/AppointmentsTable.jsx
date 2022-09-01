@@ -1,6 +1,16 @@
-import { Table, TableBody, TableFooter, TablePagination, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-import moment from 'moment';
-import { useState } from 'react';
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TablePagination,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+} from "@mui/material";
+import moment from "moment";
+import { useState } from "react";
 
 function DenseTable(props) {
   const { appointments } = props;
@@ -13,16 +23,16 @@ function DenseTable(props) {
   };
 
   const formatDate = (date) => {
-    const fullDate = moment.utc(date).format('DD/MM/YYYY');
+    const fullDate = moment.utc(date).format("DD/MM/YYYY");
 
     return fullDate;
-  }
+  };
 
   const formatTime = (date) => {
-    const fullTime = moment.utc(date).format('HH:mm');
+    const fullTime = moment.utc(date).format("HH:mm");
 
-    return fullTime !== 'Invalid date' ? fullTime : '00:00';
-  }
+    return fullTime !== "Invalid date" ? fullTime : "00:00";
+  };
 
   return (
     <TableContainer component={Paper}>
@@ -43,7 +53,7 @@ function DenseTable(props) {
             .map((ap) => (
               <TableRow
                 key={ap._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
                 <TableCell component="th" align="left" scope="row">
                   {formatDate(ap.start)}

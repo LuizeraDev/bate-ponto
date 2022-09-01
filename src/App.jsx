@@ -1,11 +1,11 @@
-import Routes from './routes';
+import Routes from "./routes";
 
-import { ThemeProvider } from '@emotion/react';
-import { Theme } from './themes';
+import { ThemeProvider } from "@emotion/react";
+import { Theme } from "./themes";
 
 function App() {
   return (
-    <ThemeProvider theme={ Theme }>
+    <ThemeProvider theme={Theme}>
       <Routes />
     </ThemeProvider>
   );

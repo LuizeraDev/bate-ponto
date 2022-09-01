@@ -1,10 +1,21 @@
-import { Table, TableBody, TableFooter, TablePagination, TableCell, TableContainer, TableHead, TableRow, Paper, Button } from '@mui/material';
-import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
-import axios from 'axios';
-import Swal from 'sweetalert2';
-import { useNavigate } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import {
+  Table,
+  TableBody,
+  TableFooter,
+  TablePagination,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+} from "@mui/material";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
+import axios from "axios";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 function DenseTable(props) {
   const navigate = useNavigate();
@@ -14,58 +25,64 @@ function DenseTable(props) {
 
   const [page, setPage] = useState(0);
   const rowsPerPage = 5;
-  const emptyRows = rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
+  const emptyRows =
+    rowsPerPage - Math.min(rowsPerPage, users.length - page * rowsPerPage);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
   };
 
   const checkAdministrator = (isAdmin) => {
-    return isAdmin ? 'Sim' : 'Não';
-  }
+    return isAdmin ? "Sim" : "Não";
+  };
 
   const getUsers = async (userName) => {
-    const userToken = localStorage.getItem('token');
+    const userToken = localStorage.getItem("token");
 
-    const response = await axios.get(`${process.env.REACT_APP_API_URL}/user/employee?name=${userName}`, {
-      headers: {
-        'Authorization': `Bearer ${userToken}`
-      },
-    });
+    const response = await axios.get(
+      `${process.env.REACT_APP_API_URL}/user/employee?name=${userName}`,
+      {
+        headers: {
+          Authorization: `Bearer ${userToken}`,
+        },
+      }
+    );
     setUsers(response.data.users);
 
     return response.data.users;
-  }
+  };
 
   const editUser = (userId) => {
-    navigate('/user/edit', { state: userId });
-  }
+    navigate("/user/edit", { state: userId });
+  };
 
   const removeUser = (userId) => {
-    const userToken = localStorage.getItem('token');
+    const userToken = localStorage.getItem("token");
     Swal.fire({
-      title: 'remover este colaborador?',
-      text: 'Essa ação não poderá ser desfeita.',
+      title: "remover este colaborador?",
+      text: "Essa ação não poderá ser desfeita.",
       showCancelButton: true,
-      confirmButtonText: 'Sim',
-      cancelButtonText: 'Cancelar',
-      confirmButtonColor: '#d32f2f'
+      confirmButtonText: "Sim",
+      cancelButtonText: "Cancelar",
+      confirmButtonColor: "#d32f2f",
     }).then((result) => {
       if (result.isConfirmed) {
-        axios.delete(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
-          headers: {
-            'Authorization': `Bearer ${userToken}`
-          },
-        }).then(res => {
-          Swal.fire('Removido com sucesso!', '', 'success');
-          getUsers('');
-        })
+        axios
+          .delete(`${process.env.REACT_APP_API_URL}/user/${userId}`, {
+            headers: {
+              Authorization: `Bearer ${userToken}`,
+            },
+          })
+          .then((res) => {
+            Swal.fire("Removido com sucesso!", "", "success");
+            getUsers("");
+          });
       }
-    })
-  }
+    });
+  };
 
   useEffect(() => {
-    getUsers(userName)
+    getUsers(userName);
   }, [userName]);
 
   return (
@@ -86,17 +103,23 @@ function DenseTable(props) {
             .map((user) => (
               <TableRow
                 key={user._id}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
               >
-                <TableCell component="th" align="left" scope="row">{user.name}</TableCell>
+                <TableCell component="th" align="left" scope="row">
+                  {user.name}
+                </TableCell>
                 <TableCell align="center">{user.email}</TableCell>
-                <TableCell align="center">{checkAdministrator(user.isAdmin)}</TableCell>
+                <TableCell align="center">
+                  {checkAdministrator(user.isAdmin)}
+                </TableCell>
                 <TableCell align="center">
                   <Button
                     variant="contained"
                     sx={{ py: 0.6 }}
                     color="info"
-                    onClick={() => { editUser(user._id) }}
+                    onClick={() => {
+                      editUser(user._id);
+                    }}
                   >
                     <EditIcon />
                   </Button>
@@ -106,7 +129,9 @@ function DenseTable(props) {
                     variant="contained"
                     sx={{ py: 0.6 }}
                     color="error"
-                    onClick={() => { removeUser(user._id) }}
+                    onClick={() => {
+                      removeUser(user._id);
+                    }}
                   >
                     <DeleteIcon />
                   </Button>
