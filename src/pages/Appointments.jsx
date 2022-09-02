@@ -69,10 +69,12 @@ function Appointments() {
                 alignItems: "center",
               }}
             >
-              <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+              <LocalizationProvider
+                dateAdapter={AdapterDateFns}
+                adapterLocale={ptBR}
+              >
                 <DatePicker
-                  minDate
-                  maxDate
+                  maxDate={moment()}
                   label="Data Início"
                   value={dateStart}
                   onChange={(newDateStart) => {
@@ -94,10 +96,12 @@ function Appointments() {
                 alignItems: "center",
               }}
             >
-              <LocalizationProvider dateAdapter={AdapterDateFns} locale={ptBR}>
+              <LocalizationProvider
+                dateAdapter={AdapterDateFns}
+                adapterLocale={ptBR}
+              >
                 <DatePicker
-                  minDate
-                  maxDate
+                  maxDate={moment()}
                   label="Data Fim"
                   value={dateEnd}
                   onChange={(newDateEnd) => {
