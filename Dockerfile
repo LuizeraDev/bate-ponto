@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
+RUN yarn install --ignore-engines --network-timeout 600000
 
 COPY . .
 

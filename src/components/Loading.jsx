@@ -5,23 +5,18 @@ import Navbar from '../components/Navbar';
 
 function CircularColor() {
   return (
-    <Box>
+    <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar />
-      <Stack sx={{ color: 'grey.500' }} spacing={2} direction="row">
-        <Container disableGutters maxWidth="sm" component="main" sx={{ pt: 10 }}>
-          <Box
-            sx={{
-              mt: 5,
-              mb: 5,
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-            }}
-          >
-            <CircularProgress color="primary" thickness={4} size={230} />
-          </Box>
-        </Container>
-      </Stack>
+      <Box
+        sx={{
+          flexGrow: 1,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+        }}
+      >
+        <CircularProgress color="primary" thickness={4} size={230} />
+      </Box>
     </Box>
   );
 }
